@@ -5,15 +5,9 @@ namespace Cut
 {
     public class InputButton : MonoBehaviour
     {
-        public class InputButtonPressedEventArgs : EventArgs
-        {
-            public InputButtonPressedEventArgs(int buttonNumber) { _pressedButton = buttonNumber; }
-            private int _pressedButton;
-        }
-
         [SerializeField] private int _buttonNumber;
 
-        public event EventHandler<InputButtonPressedEventArgs> ButtonPressed;
+        public static event EventHandler<InputButtonPressedEventArgs> ButtonPressed;
 
         protected virtual void OnButtonPressed(InputButtonPressedEventArgs e)
         {
