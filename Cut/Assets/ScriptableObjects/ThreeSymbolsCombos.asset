@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: ThreeSymbolsCombos
   m_EditorClassIdentifier: 
   _combos:
-  - _combo: 0000000000000000000000000000000000000000
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
-  - _combo: 
+  - _combo: 010000000500000001000000
+  - _combo: 010000000200000001000000
+  - _combo: 050000000300000006000000
+  - _combo: 070000000700000007000000

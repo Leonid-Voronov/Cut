@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,11 @@ namespace Cut
         [SerializeField] private List<Combo> _combos;
 
         public List<Combo> Combos => _combos;
-        public List<int> GetCombo(int index) { return _combos[index].Value; }
+        public List<int> GetCombo(int index) 
+        {
+            return _combos[index].Value; 
+        }
     }
-
 
     [System.Serializable]
     public class Combo
