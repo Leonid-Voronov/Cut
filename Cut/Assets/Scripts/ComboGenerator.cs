@@ -12,14 +12,27 @@ namespace Cut
         [SerializeField] private CombosTemplatesSO _templates;
 
         private List<int> _buttons = new List<int>();
+        private ButtonSideQualifier _buttonSideQualifier;
 
         private void Start () 
         {
             _buttons.AddRange(_leftButtons);
             _buttons.AddRange(_rightButtons);
+            _buttonSideQualifier = new ButtonSideQualifier(_buttons);
 
             for (int i = 0; i < 20; i++)
-                GenerateCombo(new List<int> { 1, 5, 1 });
+            {
+                List<int> randomTemplate = GetRandomTemplate(_templates);
+                /*string f = "";
+                foreach (int item in  randomTemplate) { f += item; }
+                Debug.Log(f);*/
+
+                List<int> result = GenerateCombo(randomTemplate);
+                /*string k = "";
+                foreach(int item in result) { k += item; }
+                Debug.Log(k);*/
+            }
+                
         }
 
         private List<int> GetRandomTemplate(CombosTemplatesSO templates)
@@ -41,17 +54,30 @@ namespace Cut
             return result;
         }
 
-        public void GenerateCombo(List<int> template)
+        private List<int> ChooseAvailableButtons(int changingButton, GenerationMode generationMode)
+        {
+            if (generationMode == GenerationMode.FullRandom)
+            {
+                return _buttons;
+            }
+            else
+            {
+                List<int> result = _buttonSideQualifier.IsButtonLeft(changingButton) ? _leftButtons : _rightButtons;
+                return result;
+            }
+        }
+
+        public List<int> GenerateCombo(List<int> template)
         {
             List<int> result = new List<int>(template);
             List<int> uniqueElements = GetUniqueElements(template);
             List<int> changedUniqueElements = new List<int>(uniqueElements);
             List<bool> flagList = Enumerable.Repeat(element: false, count: result.Count).ToList();
-
             List<int> availableButtons = new List<int>(_buttons);
+
             for (int i = 0; i < changedUniqueElements.Count;  i++) 
             {
-                changedUniqueElements[i] = GetRandomAvailableButton( ref availableButtons);
+                changedUniqueElements[i] = GetRandomAvailableButton(ref availableButtons);
 
                 for (int j = 0; j < result.Count; j++)
                     if (result[j] == uniqueElements[i] && flagList[j] == false)
@@ -61,11 +87,14 @@ namespace Cut
                     }
             }
 
-            //string k = "";
-            //foreach(int item in result) { k += item; }
-            //Debug.Log(k);
+            return result;
         }
-        
+    }
+
+    public enum GenerationMode
+    {
+        FullRandom,
+        AccordinglyWithHand
     }
 }
 
