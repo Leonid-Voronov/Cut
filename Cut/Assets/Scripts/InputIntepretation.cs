@@ -1,23 +1,43 @@
+using System;
 using UnityEngine;
+using Zenject;
 using static UnityEngine.EventSystems.PointerEventData;
 
 namespace Cut
 {
-    public class InputIntepretation : MonoBehaviour
+    public class InputIntepretation : IDisposable
     {
-        private void OnEnable()
+        private ButtonsHolderSO _buttonsHolder;
+
+        [Inject]
+        public InputIntepretation(ButtonsHolderSO buttonsHolder)
         {
+            _buttonsHolder = buttonsHolder;
+
             InputButton.ButtonPressed += AddButtonToCombo;
+            Application.quitting += Dispose;
         }
 
-        private void AddButtonToCombo(object snder, InputButtonPressedEventArgs e)
+        private void AddButtonToCombo(object sender, InputButtonPressedEventArgs e)
         {
-            Debug.Log(e.PressedButton);
+            
+            if (_buttonsHolder.Buttons.Contains(e.PressedButton))
+            {
+                //add to combo
+
+                Debug.Log(e.PressedButton);
+            }
+            else
+            {
+                Debug.LogWarning( e.PressedButton + " number isn't supported, change button's number to appropriate");
+                return;
+            }
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             InputButton.ButtonPressed -= AddButtonToCombo;
+            Application.quitting -= Dispose;
         }
     }
 }

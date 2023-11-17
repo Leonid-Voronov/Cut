@@ -9,10 +9,6 @@ namespace Cut.Infrastracture
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
         public override void InstallBindings()
         {
-            Container.Bind<IComboGeneratorTest>()
-                .To<ComboGeneratorTest>()
-                .AsSingle();
-
             Container.Bind<CombosTemplatesSO>()
                 .FromInstance( _templates )
                 .AsSingle();
@@ -44,6 +40,16 @@ namespace Cut.Infrastracture
             Container.Bind<IListUniqueService>()
                 .To<ListUniqueService>()
                 .AsSingle();
+
+            Container.Bind<InputIntepretation>()
+                .To<InputIntepretation>()
+                .AsSingle()
+                .NonLazy();
+
+            //Tests
+
+            //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
+
         }
     }
 }

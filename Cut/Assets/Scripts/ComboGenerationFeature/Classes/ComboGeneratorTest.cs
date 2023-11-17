@@ -18,6 +18,7 @@ namespace Cut
             _listDisplayer = listDisplayer;
             _comboGenerator = comboGenerator;
             _templatesSO = combosTemplatesSO;
+            TestComboGenerator();
         }
 
         public void TestComboGenerator()
