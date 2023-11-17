@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Cut
 {
-    public class ListConsoleDisplayer
+    public class ListConsoleDisplayer : IListDisplayer
     {
         public void ShowList(List<int> list)
         {
@@ -11,6 +11,5 @@ namespace Cut
             foreach (int item in  list) { f += item; }
             Debug.Log(f);
         }
-
     }
 }

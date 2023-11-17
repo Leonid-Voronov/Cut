@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Cut
 {
-    public class ListRandomService 
+    public class ListRandomService : IListRandomService
     {
         public int GetRandomAvailableButton(ref List<int> availableButtons)
         {

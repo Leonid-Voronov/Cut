@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Cut
 {
-    public class ListUniqueService 
+    public class ListUniqueService : IListUniqueService
     {
         public List<int> GetUniqueElements(List<int> template)
         {

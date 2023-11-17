@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Cut
 {
-    public class ButtonsHolderSO : MonoBehaviour
+    [CreateAssetMenu(fileName = "Buttons", menuName = "ScriptableObjects/Buttons", order = 2)]
+    public class ButtonsHolderSO : ScriptableObject
     {
         [SerializeField] private List<int> _leftButtons;
         [SerializeField] private List<int> _rightButtons;

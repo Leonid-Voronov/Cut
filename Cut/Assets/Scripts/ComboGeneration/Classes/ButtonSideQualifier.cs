@@ -1,12 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
+using Zenject;
 
 namespace Cut
 {
-    public class ButtonSideQualifier
+    public class ButtonSideQualifier : IButtonSideQualifier
     {
+
         private int maxButtonValue;
-        public ButtonSideQualifier(List<int> _buttons) { maxButtonValue = _buttons.Last(); }
+
+        [Inject]
+        public ButtonSideQualifier(ButtonsHolderSO buttonsHolderSO) 
+        {
+            maxButtonValue = buttonsHolderSO.Buttons.Last();
+        }
 
         public bool IsButtonLeft(int buttonValue) 
         {
