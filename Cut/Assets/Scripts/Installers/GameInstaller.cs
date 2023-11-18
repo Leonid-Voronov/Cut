@@ -41,10 +41,14 @@ namespace Cut.Infrastracture
                 .To<ListUniqueService>()
                 .AsSingle();
 
-            Container.Bind<InputIntepretation>()
-                .To<InputIntepretation>()
+            Container.Bind<IComboHolder>()
+                .To<ComboHolder>()
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<IComboInspector>()
+                .To<ComboInspector>()
+                .AsSingle();
 
             //Tests
 
