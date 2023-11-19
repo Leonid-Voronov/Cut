@@ -5,8 +5,13 @@ namespace Cut.Infrastracture
 {
     public class GameInstaller : MonoInstaller
     {
+        [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
+
+        [Header("View")]
+        [SerializeField] private ComboDisplayer _comboDisplayer;
+
         public override void InstallBindings()
         {
             Container.Bind<CombosTemplatesSO>()
@@ -49,6 +54,23 @@ namespace Cut.Infrastracture
             Container.Bind<IComboInspector>()
                 .To<ComboInspector>()
                 .AsSingle();
+
+            Container.Bind<IComboSwitcher>()
+                .To<ComboSwitcher>()
+                .AsSingle();
+            
+            Container.Bind<IComboFinisher>()
+                .To<ComboFinisherPrototype>()
+                .AsSingle();
+
+            Container.Bind<IComboDisplayer>()
+                .FromInstance(_comboDisplayer)
+                .AsSingle();
+
+            Container.Bind<GameStarter>()
+                .To<GameStarter>()
+                .AsSingle()
+                .NonLazy();
 
             //Tests
 
