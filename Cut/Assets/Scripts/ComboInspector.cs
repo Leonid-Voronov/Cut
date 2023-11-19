@@ -37,6 +37,11 @@ namespace Cut
         }
 
         public bool IsExpectedComboAvailable() { return _expectedCombo.Count > 0; }
+
+        public void SetExpectedCombo(List<int> newCombo)
+        {
+            _expectedCombo = newCombo;
+        }
     }
 }
 

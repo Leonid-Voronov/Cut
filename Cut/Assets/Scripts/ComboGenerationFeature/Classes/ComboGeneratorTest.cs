@@ -9,15 +9,12 @@ namespace Cut
         private IListDisplayer _listDisplayer;
         private IComboGenerator _comboGenerator;
 
-        private CombosTemplatesSO _templatesSO;
-
         [Inject]
-        public ComboGeneratorTest(IRandomTemplateService randomTemplateService, IListDisplayer listDisplayer, IComboGenerator comboGenerator, CombosTemplatesSO combosTemplatesSO)
+        public ComboGeneratorTest(IRandomTemplateService randomTemplateService, IListDisplayer listDisplayer, IComboGenerator comboGenerator)
         {
             _randomTemplateService = randomTemplateService;
             _listDisplayer = listDisplayer;
             _comboGenerator = comboGenerator;
-            _templatesSO = combosTemplatesSO;
             TestComboGenerator();
         }
 
@@ -25,7 +22,7 @@ namespace Cut
         {
             for (int i = 0; i < 20; i++)
             {
-                List<int> randomTemplate = _randomTemplateService.GetRandomTemplate(_templatesSO);
+                List<int> randomTemplate = _randomTemplateService.GetRandomTemplate();
                 _listDisplayer.ShowList(randomTemplate);
 
                 List<int> result = _comboGenerator.GenerateCombo(randomTemplate);

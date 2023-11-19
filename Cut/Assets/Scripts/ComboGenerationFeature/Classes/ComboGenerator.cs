@@ -26,7 +26,7 @@ namespace Cut
             List<int> result = new List<int>(template);
             List<int> uniqueElements = _listUniqueService.GetUniqueElements(template);
             List<int> changedUniqueElements = new List<int>(uniqueElements);
-            List<bool> flagList = Enumerable.Repeat(element: false, count: result.Count).ToList();
+            List<bool> flagList = Enumerable.Repeat(element: false, count: result.Count).ToList(); //to change items in result only once
             List<int> availableButtons = new List<int>(_buttonsHolderSO.Buttons);
 
             for (int i = 0; i < changedUniqueElements.Count;  i++) 

@@ -5,10 +5,17 @@ namespace Cut
 {
     public class RandomTemplateService : IRandomTemplateService
     {
-        public List<int> GetRandomTemplate(CombosTemplatesSO templates)
+        private CombosTemplatesSO _templates;
+
+        public RandomTemplateService(CombosTemplatesSO combosTemplatesSO) 
         {
-            int randomIndex = Random.Range(0, templates.Combos.Count);
-            return templates.GetCombo(randomIndex);
+            _templates = combosTemplatesSO;
+        }
+
+        public List<int> GetRandomTemplate()
+        {
+            int randomIndex = Random.Range(0, _templates.Combos.Count);
+            return _templates.GetCombo(randomIndex);
         }
     }
 }

@@ -5,6 +5,6 @@ namespace Cut
 {
     public interface IRandomTemplateService
     {
-        public List<int> GetRandomTemplate(CombosTemplatesSO templates);
+        public List<int> GetRandomTemplate();
     }
 }
