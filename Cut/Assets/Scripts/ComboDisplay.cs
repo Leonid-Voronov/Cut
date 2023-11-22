@@ -4,7 +4,7 @@ using TMPro;
 
 namespace Cut
 {
-    public class ComboDisplayer : MonoBehaviour, IComboDisplayer
+    public class ComboDisplay : MonoBehaviour, IComboDisplay
     {
         [SerializeField] private TMP_Text text;
         

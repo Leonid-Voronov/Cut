@@ -12,16 +12,18 @@ namespace Cut
         private IListDisplayer _listDisplayer;
         private IComboInspector _comboInspector;
         private IComboFinisher _comboFinisher;
+        private IComboBreaker _comboBreaker;
 
         private const int maxComboSize = 10; //for testing purposes only
 
         [Inject]
-        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher)
+        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher, IComboBreaker comboBreaker)
         {
             _buttonsHolder = buttonsHolder;
             _listDisplayer = listDisplayer;
             _comboInspector = comboInspector;
             _comboFinisher = comboFinisher;
+            _comboBreaker = comboBreaker;
 
             InputButton.ButtonPressed += AddButtonToCombo;
             Application.quitting += Dispose;
@@ -38,7 +40,7 @@ namespace Cut
                 {
                     if (_comboInspector.IsComboWrong(_currentCombo))
                     {
-                        //lose
+                        _comboBreaker.BreakCombo();
                         ResetCombo();
                     }
                     else if (_comboInspector.IsComboFinished(_currentCombo))

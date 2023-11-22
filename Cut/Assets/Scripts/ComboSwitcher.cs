@@ -8,10 +8,10 @@ namespace Cut
         private IComboInspector _comboInspector;
         private IComboGenerator _comboGenerator;
         private IRandomTemplateService _randomTemplateService;
-        private IComboDisplayer _comboDisplayer;
+        private IComboDisplay _comboDisplayer;
 
         [Inject]
-        public ComboSwitcher(IComboInspector comboInspector, IComboGenerator comboGenerator, IRandomTemplateService randomTemplateService, IComboDisplayer comboDisplayer)
+        public ComboSwitcher(IComboInspector comboInspector, IComboGenerator comboGenerator, IRandomTemplateService randomTemplateService, IComboDisplay comboDisplayer)
         {
             _comboInspector = comboInspector;
             _comboGenerator = comboGenerator;

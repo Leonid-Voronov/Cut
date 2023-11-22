@@ -1017,6 +1017,7 @@ GameObject:
   - component: {fileID: 930016645}
   - component: {fileID: 930016647}
   - component: {fileID: 930016646}
+  - component: {fileID: 930016648}
   m_Layer: 5
   m_Name: FinishedCombosDisplay
   m_TagString: Untagged
@@ -1083,6 +1084,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930016644}
   m_CullTransparentMesh: 1
+--- !u!114 &930016648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930016644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470cbb7ed0f954d4280514d003a964af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 655911820}
 --- !u!1001 &1055816692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1322,6 +1336,7 @@ GameObject:
   - component: {fileID: 1556409810}
   - component: {fileID: 1556409812}
   - component: {fileID: 1556409811}
+  - component: {fileID: 1556409813}
   m_Layer: 5
   m_Name: BrokenCombosDisplay
   m_TagString: Untagged
@@ -1388,6 +1403,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556409809}
   m_CullTransparentMesh: 1
+--- !u!114 &1556409813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556409809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e7942ffcfdcb24193c2e1b03930251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 195223385}
 --- !u!1 &1588366492
 GameObject:
   m_ObjectHideFlags: 0

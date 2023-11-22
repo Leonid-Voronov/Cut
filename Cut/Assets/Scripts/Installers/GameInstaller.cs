@@ -10,7 +10,7 @@ namespace Cut.Infrastracture
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
 
         [Header("View")]
-        [SerializeField] private ComboDisplayer _comboDisplayer;
+        [SerializeField] private ComboDisplay _comboDisplayer;
 
         public override void InstallBindings()
         {
@@ -63,7 +63,7 @@ namespace Cut.Infrastracture
                 .To<ComboFinisherPrototype>()
                 .AsSingle();
 
-            Container.Bind<IComboDisplayer>()
+            Container.Bind<IComboDisplay>()
                 .FromInstance(_comboDisplayer)
                 .AsSingle();
 
@@ -71,6 +71,14 @@ namespace Cut.Infrastracture
                 .To<GameStarter>()
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<SessionStatistics>()
+                .To<SessionStatistics>()
+                .AsSingle();
+
+            Container.Bind<IComboBreaker>()
+                .To<ComboBreakerPrototype>()
+                .AsSingle();
 
             //Tests
 

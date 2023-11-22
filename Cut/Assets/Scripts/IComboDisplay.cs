@@ -2,7 +2,7 @@
 
 namespace Cut
 {
-    public interface IComboDisplayer
+    public interface IComboDisplay
     {
         public void DisplayCombo(List<int> combo);
     }
