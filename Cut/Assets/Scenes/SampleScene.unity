@@ -1448,6 +1448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _templates: {fileID: 11400000, guid: 58843bb58980407458e9c9f827dd3fe1, type: 2}
   _buttonsHolder: {fileID: 11400000, guid: 6dc015b565a03414f855832a8f0b71bd, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 11ce0ab02ffafd1438e6f80f5b4e4cb9, type: 2}
   _comboDisplayer: {fileID: 2104256834}
 --- !u!114 &1588366494
 MonoBehaviour:

@@ -8,6 +8,7 @@ namespace Cut.Infrastracture
         [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
+        [SerializeField] private GameConfigSO _gameConfig;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
@@ -80,10 +81,28 @@ namespace Cut.Infrastracture
                 .To<ComboBreakerPrototype>()
                 .AsSingle();
 
+            InstallGameModeBasedBindings();
+
             //Tests
 
             //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
 
+        }
+
+        private void InstallGameModeBasedBindings()
+        {
+            Container.Bind<IPrepTimer>() // move to if when ready
+                .To<UnlimitedPrepTimer>()
+                .AsSingle();
+
+            if (_gameConfig.UnlimitedTime)
+            {
+                //Binding1 when ready
+            }
+            else
+            {
+                //Binding2 when ready
+            }
         }
     }
 }
