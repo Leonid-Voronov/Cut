@@ -1,34 +1,55 @@
+using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
+using Zenject;
+using UnityEngine;
 
 namespace Cut
 {
-    public class FirstTapPrepTimer : IPrepTimer, IDisposable
+    public class FirstTapPrepTimer : IPrepTimer
     {
-        private bool _timerStarted = false;
-        private float _time;
-        private float _timer;
+        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationToken _cancellationToken;
+        private IComboHolder _comboHolder;
+        private float _time = 4f;
 
-        public FirstTapPrepTimer()
+        [Inject]
+        public FirstTapPrepTimer(CancellationTokenSource cancellationTokenSource)
         {
-            InputButton.ButtonPressed += StartTimer;
+            _cancellationTokenSource = cancellationTokenSource;
+            _cancellationToken = _cancellationTokenSource.Token;
+
+            ComboHolder.ComboStarted += StartTimer;
+            Application.quitting += Dispose;
         }
 
-        public bool IsTimerUnfinished()
+        private async void StartTimer(object sender, ComboStartedEventArgs e)
         {
-            return true;
+            _comboHolder = e.ComboHolder;
+            await RunScenatio();
         }
 
-        private void StartTimer(object sender, InputButtonPressedEventArgs e)
+        private async UniTask RunScenatio()
         {
-            _timerStarted = true;
-            
-        }
+            await UniTask.Delay(TimeSpan.FromSeconds(_time));
 
-        
+            if (_cancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
+            _comboHolder.PerformCombo();
+        }
 
         public void Dispose()
         {
+            _cancellationTokenSource.Cancel();
+            ComboHolder.ComboStarted -= StartTimer;
+            Application.quitting -= Dispose;
+        }
 
+        public class Factory  : PlaceholderFactory<FirstTapPrepTimer>
+        {
         }
     }
 }

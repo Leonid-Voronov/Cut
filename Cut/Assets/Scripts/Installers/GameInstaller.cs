@@ -1,5 +1,6 @@
 using Zenject;
 using UnityEngine;
+using System.Threading;
 
 namespace Cut.Infrastracture
 {
@@ -81,28 +82,26 @@ namespace Cut.Infrastracture
                 .To<ComboBreakerPrototype>()
                 .AsSingle();
 
-            InstallGameModeBasedBindings();
+            Container.Bind<GameConfigSO>()
+                .FromInstance(_gameConfig)
+                .AsSingle();
+
+            Container.Bind<IFactory<IPrepTimer>>()
+                .To<CustomPrepTimerFactory>()
+                .AsSingle();
+
+            Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
+            Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
+
+            Container.Bind<CancellationTokenSource>()
+                .To<CancellationTokenSource>()
+                .AsTransient();
 
             //Tests
 
+            //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
             //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
 
-        }
-
-        private void InstallGameModeBasedBindings()
-        {
-            Container.Bind<IPrepTimer>() // move to if when ready
-                .To<UnlimitedPrepTimer>()
-                .AsSingle();
-
-            if (_gameConfig.UnlimitedTime)
-            {
-                //Binding1 when ready
-            }
-            else
-            {
-                //Binding2 when ready
-            }
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿namespace Cut
+﻿using System;
+
+namespace Cut
 {
-    public interface IPrepTimer 
+    public interface IPrepTimer : IDisposable
     {
-        public bool IsTimerUnfinished();
     }
 }

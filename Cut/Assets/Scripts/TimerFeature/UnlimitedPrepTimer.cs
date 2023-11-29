@@ -1,10 +1,18 @@
-﻿namespace Cut
+﻿using System;
+using Zenject;
+
+namespace Cut
 {
     public class UnlimitedPrepTimer : IPrepTimer
     {
-        public bool IsTimerUnfinished()
+        public void Dispose()
         {
-            return true;
+
+        }
+
+        public class Factory : PlaceholderFactory<UnlimitedPrepTimer>
+        {
+
         }
     }
 }
