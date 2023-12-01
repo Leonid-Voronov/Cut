@@ -13,6 +13,7 @@ namespace Cut.Infrastracture
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
+        [SerializeField] private PrepTimerDisplay _prepTimerDisplay;
 
         [Header("Monobehaviours")]
         [SerializeField] private TimerUpdater _timerUpdater;
@@ -98,6 +99,10 @@ namespace Cut.Infrastracture
 
             Container.Bind<ITimerUpdater>()
                 .FromInstance(_timerUpdater) 
+                .AsSingle();
+            
+            Container.Bind<IPrepTimerDisplay>()
+                .FromInstance(_prepTimerDisplay) 
                 .AsSingle();
 
             //Tests

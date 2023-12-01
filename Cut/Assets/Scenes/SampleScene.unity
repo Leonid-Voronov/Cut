@@ -1448,6 +1448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324998643}
+  - component: {fileID: 1324998644}
   m_Layer: 5
   m_Name: PrepBar
   m_TagString: Untagged
@@ -1477,6 +1478,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 271}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1324998644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324998642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54389ed6f89acf64e8e899b798513b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bar: {fileID: 241403282}
 --- !u!1 &1556409809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,6 +1616,7 @@ MonoBehaviour:
   _buttonsHolder: {fileID: 11400000, guid: 6dc015b565a03414f855832a8f0b71bd, type: 2}
   _gameConfig: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _comboDisplayer: {fileID: 2104256834}
+  _prepTimerDisplay: {fileID: 1324998644}
   _timerUpdater: {fileID: 2092288003}
 --- !u!114 &1588366494
 MonoBehaviour:
