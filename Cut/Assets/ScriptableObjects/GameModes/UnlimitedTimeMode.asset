@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: UnlimitedTimeMode
   m_EditorClassIdentifier: 
   _unlimitedTime: 1
+  _prepTime: 4

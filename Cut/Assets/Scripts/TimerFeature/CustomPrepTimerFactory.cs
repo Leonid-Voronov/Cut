@@ -6,12 +6,14 @@ namespace Cut
     {
         private UnlimitedPrepTimer.Factory _unlimitedTimerFactory;
         private FirstTapPrepTimer.Factory _firstTapTimerFactory;
+
         private GameConfigSO _gameConfigSO;
 
         public CustomPrepTimerFactory(GameConfigSO gameConfigSO, UnlimitedPrepTimer.Factory unlimitedTimerFactory, FirstTapPrepTimer.Factory firstTapTimerFactory)
         {
             _unlimitedTimerFactory = unlimitedTimerFactory;
             _firstTapTimerFactory = firstTapTimerFactory;
+
             _gameConfigSO = gameConfigSO;
         }
 

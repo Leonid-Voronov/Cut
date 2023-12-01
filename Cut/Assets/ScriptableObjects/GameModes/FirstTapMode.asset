@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: FirstTapMode
   m_EditorClassIdentifier: 
   _unlimitedTime: 0
+  _prepTime: 4

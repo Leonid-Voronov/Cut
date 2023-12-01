@@ -14,6 +14,9 @@ namespace Cut.Infrastracture
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
 
+        [Header("Monobehaviours")]
+        [SerializeField] private TimerUpdater _timerUpdater;
+
         public override void InstallBindings()
         {
             Container.Bind<CombosTemplatesSO>()
@@ -93,9 +96,9 @@ namespace Cut.Infrastracture
             Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
             Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
 
-            Container.Bind<CancellationTokenSource>()
-                .To<CancellationTokenSource>()
-                .AsTransient();
+            Container.Bind<ITimerUpdater>()
+                .FromInstance(_timerUpdater) 
+                .AsSingle();
 
             //Tests
 

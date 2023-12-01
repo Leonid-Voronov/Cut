@@ -1,56 +1,53 @@
-using Cysharp.Threading.Tasks;
+using Cut;
 using System;
 using System.Threading;
 using Zenject;
 using UnityEngine;
 
-namespace Cut
+public class FirstTapPrepTimer : IPrepTimer
 {
-    public class FirstTapPrepTimer : IPrepTimer
+    private IComboHolder _comboHolder;
+    private ITimerUpdater _timerUpdater;
+
+    private float _prepTime;
+    private float _remainingTime;
+
+    [Inject]
+    public FirstTapPrepTimer(GameConfigSO gameConfig, ITimerUpdater timerUpdater)
     {
-        private CancellationTokenSource _cancellationTokenSource;
-        private CancellationToken _cancellationToken;
-        private IComboHolder _comboHolder;
-        private float _time = 4f;
+        _prepTime = gameConfig.PrepTime;
+        _remainingTime = _prepTime;
+        _timerUpdater = timerUpdater;
 
-        [Inject]
-        public FirstTapPrepTimer(CancellationTokenSource cancellationTokenSource)
+        ComboHolder.ComboStarted += StartTimer;
+        Application.quitting += Dispose;
+    }
+
+    private void StartTimer(object sender, ComboStartedEventArgs e)
+    {
+        _comboHolder = e.ComboHolder;
+        _timerUpdater.Subscribe(this);
+    }
+
+    public void UpdateTimer()
+    {
+        _remainingTime -= Time.deltaTime;
+
+        if (_remainingTime <= 0)
         {
-            _cancellationTokenSource = cancellationTokenSource;
-            _cancellationToken = _cancellationTokenSource.Token;
-
-            ComboHolder.ComboStarted += StartTimer;
-            Application.quitting += Dispose;
-        }
-
-        private async void StartTimer(object sender, ComboStartedEventArgs e)
-        {
-            _comboHolder = e.ComboHolder;
-            await RunScenatio();
-        }
-
-        private async UniTask RunScenatio()
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(_time));
-
-            if (_cancellationToken.IsCancellationRequested)
-            {
-                return;
-            }
-
             _comboHolder.PerformCombo();
         }
+    }
 
-        public void Dispose()
-        {
-            _cancellationTokenSource.Cancel();
-            ComboHolder.ComboStarted -= StartTimer;
-            Application.quitting -= Dispose;
-        }
+    public void Dispose()
+    {
+        _timerUpdater.Unsubscribe(this);
+        ComboHolder.ComboStarted -= StartTimer;
+        Application.quitting -= Dispose;
+    }
 
-        public class Factory  : PlaceholderFactory<FirstTapPrepTimer>
-        {
-        }
+    public class Factory : PlaceholderFactory<FirstTapPrepTimer>
+    {
+
     }
 }
-

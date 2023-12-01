@@ -1,5 +1,4 @@
-﻿using System;
-using Zenject;
+﻿using Zenject;
 
 namespace Cut
 {
@@ -8,6 +7,10 @@ namespace Cut
         public void Dispose()
         {
 
+        }
+
+        public void UpdateTimer()
+        { 
         }
 
         public class Factory : PlaceholderFactory<UnlimitedPrepTimer>
