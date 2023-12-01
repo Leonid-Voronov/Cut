@@ -1,5 +1,6 @@
 using Zenject;
 using UnityEngine;
+using System.Threading;
 
 namespace Cut.Infrastracture
 {
@@ -8,9 +9,14 @@ namespace Cut.Infrastracture
         [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
+        [SerializeField] private GameConfigSO _gameConfig;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
+        [SerializeField] private PrepTimerDisplay _prepTimerDisplay;
+
+        [Header("Monobehaviours")]
+        [SerializeField] private TimerUpdater _timerUpdater;
 
         public override void InstallBindings()
         {
@@ -80,8 +86,28 @@ namespace Cut.Infrastracture
                 .To<ComboBreakerPrototype>()
                 .AsSingle();
 
+            Container.Bind<GameConfigSO>()
+                .FromInstance(_gameConfig)
+                .AsSingle();
+
+            Container.Bind<IFactory<IPrepTimer>>()
+                .To<CustomPrepTimerFactory>()
+                .AsSingle();
+
+            Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
+            Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
+
+            Container.Bind<ITimerUpdater>()
+                .FromInstance(_timerUpdater) 
+                .AsSingle();
+            
+            Container.Bind<IPrepTimerDisplay>()
+                .FromInstance(_prepTimerDisplay) 
+                .AsSingle();
+
             //Tests
 
+            //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
             //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
 
         }
