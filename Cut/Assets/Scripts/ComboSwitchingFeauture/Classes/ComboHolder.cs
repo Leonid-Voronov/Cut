@@ -40,7 +40,6 @@ namespace Cut
 
                 _currentCombo.Add(e.PressedButton);
                 _listDisplayer.ShowList(_currentCombo);
-
                 InspectCombo();
 
                 if (_currentCombo.Count > maxComboSize)

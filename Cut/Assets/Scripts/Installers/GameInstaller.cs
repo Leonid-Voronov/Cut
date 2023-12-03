@@ -87,8 +87,7 @@ namespace Cut.Infrastracture
 
             Container.Bind<IFactory<IPrepTimer>>()
                 .To<CustomPrepTimerFactory>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
 
             Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
             Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
@@ -101,6 +100,11 @@ namespace Cut.Infrastracture
             Container.Bind<IPrepTimerDisplay>()
                 .FromInstance(_prepTimerDisplay) 
                 .AsSingle();
+
+            Container.Bind<ITimerHolder>()
+                .To<TimerHolder>()
+                .AsSingle()
+                .NonLazy();
 
             //Tests
 
