@@ -73,11 +73,6 @@ namespace Cut.Infrastracture
                 .FromInstance(_comboDisplayer)
                 .AsSingle();
 
-            Container.Bind<GameStarter>()
-                .To<GameStarter>()
-                .AsSingle()
-                .NonLazy();
-
             Container.Bind<SessionStatistics>()
                 .To<SessionStatistics>()
                 .AsSingle();
@@ -92,10 +87,12 @@ namespace Cut.Infrastracture
 
             Container.Bind<IFactory<IPrepTimer>>()
                 .To<CustomPrepTimerFactory>()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
 
             Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
             Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
+            Container.BindFactory<InstantPrepTimer, InstantPrepTimer.Factory>();
 
             Container.Bind<ITimerUpdater>()
                 .FromInstance(_timerUpdater) 

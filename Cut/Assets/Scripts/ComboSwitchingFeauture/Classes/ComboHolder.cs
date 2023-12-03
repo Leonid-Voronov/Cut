@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Cut
@@ -15,22 +14,18 @@ namespace Cut
         private IComboInspector _comboInspector;
         private IComboFinisher _comboFinisher;
         private IComboBreaker _comboBreaker;
-        private IPrepTimer _currentPrepTimer;
-        private IFactory<IPrepTimer> _customPrepTimerFactory;
 
         private const int maxComboSize = 10; //for testing purposes only
-        public static event EventHandler<ComboStartedEventArgs> ComboStarted;
+        public event EventHandler ComboStarted;
 
         [Inject]
-        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IFactory<IPrepTimer> customPrepTimerFactory)
+        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher, IComboBreaker comboBreaker)
         {
             _buttonsHolder = buttonsHolder;
             _listDisplayer = listDisplayer;
             _comboInspector = comboInspector;
             _comboFinisher = comboFinisher;
             _comboBreaker = comboBreaker;
-            _customPrepTimerFactory = customPrepTimerFactory;
-            _currentPrepTimer = _customPrepTimerFactory.Create();
 
             InputButton.ButtonPressed += AddButtonToCombo;
             Application.quitting += Dispose;
@@ -61,8 +56,6 @@ namespace Cut
         public void ResetCombo()
         {
             _currentCombo.Clear();
-            _currentPrepTimer.Dispose();
-            _currentPrepTimer = _customPrepTimerFactory.Create();
         }
 
         public void PerformCombo()
@@ -94,7 +87,7 @@ namespace Cut
 
         private void OnComboStarted()
         {
-            ComboStarted?.Invoke(this, new ComboStartedEventArgs(this));
+            ComboStarted?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()

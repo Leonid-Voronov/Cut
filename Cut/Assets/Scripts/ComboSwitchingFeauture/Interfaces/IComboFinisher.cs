@@ -1,7 +1,10 @@
-﻿namespace Cut
+﻿using System;
+
+namespace Cut
 {
     public interface IComboFinisher
     {
-        public void FinishCombo();
+        void FinishCombo();
+        event EventHandler ComboFinished;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace Cut
 {
@@ -6,6 +7,8 @@ namespace Cut
     {
         private IComboSwitcher _comboSwitcher;
         private SessionStatistics _sessionStatistics;
+
+        public event EventHandler ComboFinished;
 
         [Inject]
         public ComboFinisherPrototype(IComboSwitcher comboSwitcher, SessionStatistics sessionStatistics)
@@ -16,8 +19,14 @@ namespace Cut
 
         public void FinishCombo()
         {
-            _comboSwitcher.SwitchCombo();
             _sessionStatistics.IncrementFinishedCombosNumber();
+            OnComboFinished();
+            _comboSwitcher.SwitchCombo(); //should be after OnComboFinished
+        }
+
+        private void OnComboFinished()
+        {
+            ComboFinished?.Invoke(this, EventArgs.Empty);
         }
     }
 }
