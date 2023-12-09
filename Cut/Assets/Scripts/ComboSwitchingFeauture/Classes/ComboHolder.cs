@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Cut
 {
-    public class ComboHolder : IDisposable, IComboHolder
+    public class ComboHolder : IComboHolder
     {
         private ButtonsHolderSO _buttonsHolder;
         private List<int> _currentCombo = new List<int>();
@@ -26,19 +26,16 @@ namespace Cut
             _comboInspector = comboInspector;
             _comboFinisher = comboFinisher;
             _comboBreaker = comboBreaker;
-
-            InputButton.ButtonPressed += AddButtonToCombo;
-            Application.quitting += Dispose;
         }
 
-        public void AddButtonToCombo(object sender, InputButtonPressedEventArgs e)
+        public void AddButtonToCombo(int _buttonNumber)
         {
-            if (_buttonsHolder.Buttons.Contains(e.PressedButton))
+            if (_buttonsHolder.Buttons.Contains(_buttonNumber))
             {
                 if (_currentCombo.Count == 0)
                     OnComboStarted();
 
-                _currentCombo.Add(e.PressedButton);
+                _currentCombo.Add(_buttonNumber);
                 _listDisplayer.ShowList(_currentCombo);
                 InspectCombo();
 
@@ -47,7 +44,7 @@ namespace Cut
             }
             else
             {
-                Debug.LogWarning( e.PressedButton + " number isn't supported, change button's number to appropriate");
+                Debug.LogWarning( _buttonNumber + " number isn't supported, change button's number to appropriate");
                 return;
             }
         }
@@ -87,12 +84,6 @@ namespace Cut
         private void OnComboStarted()
         {
             ComboStarted?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void Dispose()
-        {
-            InputButton.ButtonPressed -= AddButtonToCombo;
-            Application.quitting -= Dispose;
         }
     }
 }

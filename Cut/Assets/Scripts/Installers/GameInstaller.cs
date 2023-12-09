@@ -16,6 +16,7 @@ namespace Cut.Infrastracture
         [SerializeField] private PrepTimerDisplay _prepTimerDisplay;
 
         [Header("Monobehaviours")]
+        [SerializeField] private GameplayMediator _gameplayMediator;
         [SerializeField] private TimerUpdater _timerUpdater;
 
         public override void InstallBindings()
@@ -105,6 +106,10 @@ namespace Cut.Infrastracture
                 .To<TimerHolder>()
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<GameplayMediator>()
+                .FromInstance(_gameplayMediator)
+                .AsSingle();
 
             //Tests
 

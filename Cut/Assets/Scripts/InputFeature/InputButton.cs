@@ -1,34 +1,30 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Cut
 {
     public class InputButton : MonoBehaviour
     {
+        [Inject]
+        public void Construct(GameplayMediator gameplayMediator)
+        {
+            _gameplayMediator = gameplayMediator;
+        }
+
         [SerializeField] private Button _button;
         [SerializeField] private int _buttonNumber;
 
-        public static event EventHandler<InputButtonPressedEventArgs> ButtonPressed;
+        private GameplayMediator _gameplayMediator;
 
         private void OnEnable()
         {
             _button.onClick.AddListener(PressButton);
         }
 
-        protected virtual void OnButtonPressed(InputButtonPressedEventArgs e)
-        {
-            EventHandler<InputButtonPressedEventArgs> eventHandler = ButtonPressed;
-            if (eventHandler != null) 
-            {
-                eventHandler(this, e);
-            }
-        }
-
         public void PressButton()
         {
-            InputButtonPressedEventArgs args = new InputButtonPressedEventArgs(_buttonNumber);
-            OnButtonPressed(args);
+            _gameplayMediator.PassButtonToCombo(_buttonNumber);
         }
 
         private void OnDisable()
