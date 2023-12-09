@@ -14,8 +14,12 @@ namespace Cut.Infrastracture
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
         [SerializeField] private PrepTimerDisplay _prepTimerDisplay;
+        [SerializeField] private BrokenCombosDisplay _brokenCombosDisplay;
+        [SerializeField] private FinishedCombosDisplay _finishedCombosDisplay;
 
         [Header("Monobehaviours")]
+        [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
+        [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private TimerUpdater _timerUpdater;
 
         public override void InstallBindings()
@@ -73,11 +77,6 @@ namespace Cut.Infrastracture
                 .FromInstance(_comboDisplayer)
                 .AsSingle();
 
-            Container.Bind<GameStarter>()
-                .To<GameStarter>()
-                .AsSingle()
-                .NonLazy();
-
             Container.Bind<SessionStatistics>()
                 .To<SessionStatistics>()
                 .AsSingle();
@@ -96,6 +95,7 @@ namespace Cut.Infrastracture
 
             Container.BindFactory<UnlimitedPrepTimer, UnlimitedPrepTimer.Factory>();
             Container.BindFactory<FirstTapPrepTimer, FirstTapPrepTimer.Factory>();
+            Container.BindFactory<InstantPrepTimer, InstantPrepTimer.Factory>();
 
             Container.Bind<ITimerUpdater>()
                 .FromInstance(_timerUpdater) 
@@ -103,6 +103,27 @@ namespace Cut.Infrastracture
             
             Container.Bind<IPrepTimerDisplay>()
                 .FromInstance(_prepTimerDisplay) 
+                .AsSingle();
+
+            Container.Bind<ITimerHolder>()
+                .To<TimerHolder>()
+                .AsSingle()
+                .NonLazy();
+
+            Container.Bind<IGameplayMediatorToLogic>()
+                .FromInstance(_gameplayMediatorToLogic)
+                .AsSingle();
+
+            Container.Bind<IGameplayMediatorToUI>()
+                .FromInstance(_gameplayMediatorToUI)
+                .AsSingle();
+
+            Container.Bind<IBrokenCombosDisplay>()
+                .FromInstance(_brokenCombosDisplay)
+                .AsSingle();
+
+            Container.Bind<IFinishedCombosDisplay>()
+                .FromInstance(_finishedCombosDisplay)
                 .AsSingle();
 
             //Tests

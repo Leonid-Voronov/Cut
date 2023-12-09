@@ -5,10 +5,12 @@ namespace Cut
     [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameModes", order = 3)]
     public class GameConfigSO : ScriptableObject
     {
-        [SerializeField] private bool _unlimitedTime;
         [SerializeField] private float _prepTime;
-        public bool UnlimitedTime => _unlimitedTime;
+        [SerializeField] private StartTimerCondition _startTimerCondition;
+        [SerializeField] private bool _switchComboAfterFail;
         public float PrepTime => _prepTime;
+        public bool FailSwitch => _switchComboAfterFail;
+        public StartTimerCondition StartTimerCondition => _startTimerCondition;
     }
 }
 

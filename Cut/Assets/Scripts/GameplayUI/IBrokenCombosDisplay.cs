@@ -5,6 +5,6 @@ namespace Cut
 {
     public interface IBrokenCombosDisplay
     {
-        public void DisplayBrokenCombos(object sender, StatisticsViewEventArgs e);
+        public void DisplayBrokenCombos(int statisticsNumber);
     }
 }

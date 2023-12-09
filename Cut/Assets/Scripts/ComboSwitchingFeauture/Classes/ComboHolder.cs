@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Cut
 {
-    public class ComboHolder : IDisposable, IComboHolder
+    public class ComboHolder : IComboHolder
     {
         private ButtonsHolderSO _buttonsHolder;
         private List<int> _currentCombo = new List<int>();
@@ -15,37 +14,29 @@ namespace Cut
         private IComboInspector _comboInspector;
         private IComboFinisher _comboFinisher;
         private IComboBreaker _comboBreaker;
-        private IPrepTimer _currentPrepTimer;
-        private IFactory<IPrepTimer> _customPrepTimerFactory;
 
         private const int maxComboSize = 10; //for testing purposes only
-        public static event EventHandler<ComboStartedEventArgs> ComboStarted;
+        public event EventHandler ComboStarted;
 
         [Inject]
-        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IFactory<IPrepTimer> customPrepTimerFactory)
+        public ComboHolder(ButtonsHolderSO buttonsHolder, IListDisplayer listDisplayer, IComboInspector comboInspector, IComboFinisher comboFinisher, IComboBreaker comboBreaker)
         {
             _buttonsHolder = buttonsHolder;
             _listDisplayer = listDisplayer;
             _comboInspector = comboInspector;
             _comboFinisher = comboFinisher;
             _comboBreaker = comboBreaker;
-            _customPrepTimerFactory = customPrepTimerFactory;
-            _currentPrepTimer = _customPrepTimerFactory.Create();
-
-            InputButton.ButtonPressed += AddButtonToCombo;
-            Application.quitting += Dispose;
         }
 
-        public void AddButtonToCombo(object sender, InputButtonPressedEventArgs e)
+        public void AddButtonToCombo(int _buttonNumber)
         {
-            if (_buttonsHolder.Buttons.Contains(e.PressedButton))
+            if (_buttonsHolder.Buttons.Contains(_buttonNumber))
             {
                 if (_currentCombo.Count == 0)
                     OnComboStarted();
 
-                _currentCombo.Add(e.PressedButton);
+                _currentCombo.Add(_buttonNumber);
                 _listDisplayer.ShowList(_currentCombo);
-
                 InspectCombo();
 
                 if (_currentCombo.Count > maxComboSize)
@@ -53,7 +44,7 @@ namespace Cut
             }
             else
             {
-                Debug.LogWarning( e.PressedButton + " number isn't supported, change button's number to appropriate");
+                Debug.LogWarning( _buttonNumber + " number isn't supported, change button's number to appropriate");
                 return;
             }
         }
@@ -61,8 +52,6 @@ namespace Cut
         public void ResetCombo()
         {
             _currentCombo.Clear();
-            _currentPrepTimer.Dispose();
-            _currentPrepTimer = _customPrepTimerFactory.Create();
         }
 
         public void PerformCombo()
@@ -94,13 +83,7 @@ namespace Cut
 
         private void OnComboStarted()
         {
-            ComboStarted?.Invoke(this, new ComboStartedEventArgs(this));
-        }
-
-        public void Dispose()
-        {
-            InputButton.ButtonPressed -= AddButtonToCombo;
-            Application.quitting -= Dispose;
+            ComboStarted?.Invoke(this, EventArgs.Empty);
         }
     }
 }

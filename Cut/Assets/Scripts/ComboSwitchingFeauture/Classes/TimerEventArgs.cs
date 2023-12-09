@@ -2,9 +2,9 @@
 
 namespace Cut
 {
-    public class ComboStartedEventArgs : EventArgs
+    public class TimerEventArgs : EventArgs
     {
-        public ComboStartedEventArgs(ComboHolder comboHolder) { _comboHolder = comboHolder; }
+        public TimerEventArgs(ComboHolder comboHolder) { _comboHolder = comboHolder; }
         private ComboHolder _comboHolder;
         public ComboHolder ComboHolder => _comboHolder;
     }

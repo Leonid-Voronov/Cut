@@ -1,7 +1,10 @@
-﻿namespace Cut
+﻿using System;
+
+namespace Cut
 {
     public interface IComboBreaker
     {
-        public void BreakCombo();
+        void BreakCombo();
+        event EventHandler ComboBroken;
     }
 }

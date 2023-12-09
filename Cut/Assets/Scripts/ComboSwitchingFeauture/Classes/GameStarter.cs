@@ -1,22 +1,21 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Cut
 {
-    public class GameStarter
+    public class GameStarter : MonoBehaviour
     {
         private IComboSwitcher _comboSwitcher;
 
         [Inject]
-        public GameStarter(IComboSwitcher comboSwitcher)
+        public void Construct(IComboSwitcher comboSwitcher)
         {
             _comboSwitcher = comboSwitcher;
-            StartGame();
         }
 
-        private void StartGame()
+        private void Start()
         {
             _comboSwitcher.SwitchCombo();
         }
-       
     }
 }
