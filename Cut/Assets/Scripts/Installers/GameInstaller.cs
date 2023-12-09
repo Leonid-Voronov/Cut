@@ -14,9 +14,12 @@ namespace Cut.Infrastracture
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
         [SerializeField] private PrepTimerDisplay _prepTimerDisplay;
+        [SerializeField] private BrokenCombosDisplay _brokenCombosDisplay;
+        [SerializeField] private FinishedCombosDisplay _finishedCombosDisplay;
 
         [Header("Monobehaviours")]
-        [SerializeField] private GameplayMediator _gameplayMediator;
+        [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
+        [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private TimerUpdater _timerUpdater;
 
         public override void InstallBindings()
@@ -107,8 +110,20 @@ namespace Cut.Infrastracture
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<GameplayMediator>()
-                .FromInstance(_gameplayMediator)
+            Container.Bind<IGameplayMediatorToLogic>()
+                .FromInstance(_gameplayMediatorToLogic)
+                .AsSingle();
+
+            Container.Bind<IGameplayMediatorToUI>()
+                .FromInstance(_gameplayMediatorToUI)
+                .AsSingle();
+
+            Container.Bind<IBrokenCombosDisplay>()
+                .FromInstance(_brokenCombosDisplay)
+                .AsSingle();
+
+            Container.Bind<IFinishedCombosDisplay>()
+                .FromInstance(_finishedCombosDisplay)
                 .AsSingle();
 
             //Tests

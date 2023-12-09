@@ -8,19 +8,9 @@ namespace Cut
     {
         [SerializeField] private TMP_Text text;
 
-        private void OnEnable()
+        public void DisplayFinishedCombos(int statisticsNumber)
         {
-            SessionStatistics.ComboFinished += DisplayFinishedCombos;
-        }
-
-        public void DisplayFinishedCombos(object sender, StatisticsViewEventArgs e)
-        {
-            text.text = e.StatisticsNumber.ToString();
-        }
-
-        private void OnDisable()
-        {
-            SessionStatistics.ComboFinished -= DisplayFinishedCombos;
+            text.text = statisticsNumber.ToString();
         }
     }
 }

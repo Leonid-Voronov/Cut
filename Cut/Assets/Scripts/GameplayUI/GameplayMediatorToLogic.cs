@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Cut
 {
-    public class GameplayMediator : MonoBehaviour
+    public class GameplayMediatorToLogic : MonoBehaviour, IGameplayMediatorToLogic
     {
         [Inject]
         public void Construct(IComboHolder comboHolder)
@@ -12,8 +12,6 @@ namespace Cut
         }
 
         private IComboHolder _comboHolder;
-
         public void PassButtonToCombo(int buttonNumber) => _comboHolder.AddButtonToCombo(buttonNumber);
     }
 }
-

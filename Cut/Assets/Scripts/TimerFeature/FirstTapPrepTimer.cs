@@ -8,18 +8,17 @@ public class FirstTapPrepTimer : IPrepTimer
 {
     private IComboHolder _comboHolder;
     private ITimerUpdater _timerUpdater;
-    private IPrepTimerDisplay _timerDisplay;
+    private IGameplayMediatorToUI _gameplayMediator;
 
     private float _prepTime;
     private float _remainingTime;
 
     [Inject]
-    public FirstTapPrepTimer(GameConfigSO gameConfig, ITimerUpdater timerUpdater, IPrepTimerDisplay prepTimerDisplay, IComboHolder comboHolder)
+    public FirstTapPrepTimer(GameConfigSO gameConfig, ITimerUpdater timerUpdater, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
     {
         _timerUpdater = timerUpdater;
-        _timerDisplay = prepTimerDisplay;
         _comboHolder = comboHolder;
-
+        _gameplayMediator = gameplayMediator;
         _prepTime = gameConfig.PrepTime;
         _remainingTime = _prepTime;
         _timerUpdater.Subscribe(this);
@@ -29,7 +28,7 @@ public class FirstTapPrepTimer : IPrepTimer
     public void UpdateTimer()
     {
         _remainingTime -= Time.deltaTime;
-        _timerDisplay.DisplayTimer(_remainingTime, _prepTime);
+        _gameplayMediator.DisplayTimer(_remainingTime, _prepTime);
 
         if (_remainingTime <= 0)
         {
@@ -40,7 +39,7 @@ public class FirstTapPrepTimer : IPrepTimer
     public void Dispose()
     {
         _timerUpdater.Unsubscribe(this);
-        _timerDisplay.DisplayFull();
+        _gameplayMediator.DisplayFullTimer();
         Application.quitting -= Dispose;
     }
 

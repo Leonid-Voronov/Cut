@@ -7,19 +7,9 @@ namespace Cut
     {
         [SerializeField] private TMP_Text text;
 
-        private void OnEnable()
+        public void DisplayBrokenCombos(int statisticsNumber)
         {
-            SessionStatistics.ComboBroken += DisplayBrokenCombos;
-        }
-
-        public void DisplayBrokenCombos(object sender, StatisticsViewEventArgs e)
-        {
-            text.text = e.StatisticsNumber.ToString();
-        }
-
-        private void OnDisable()
-        {
-            SessionStatistics.ComboBroken -= DisplayBrokenCombos;
+            text.text = statisticsNumber.ToString();
         }
     }
 }

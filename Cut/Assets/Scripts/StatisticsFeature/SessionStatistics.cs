@@ -1,34 +1,30 @@
 ﻿using System;
+using Zenject;
 
 namespace Cut
 {
     public class SessionStatistics
     {
+        [Inject]
+        public void Construct(IGameplayMediatorToUI gameplayMediator)
+        {
+            _gameplayMediator = gameplayMediator;
+        }
+
+        private IGameplayMediatorToUI _gameplayMediator;
         private int _finishedCombosNumber = 0;
         private int _brokenCombosNumber = 0;
-
-        public static event EventHandler<StatisticsViewEventArgs> ComboFinished;
-        public static event EventHandler<StatisticsViewEventArgs> ComboBroken;
-
-        private void OnComboReset(StatisticsViewEventArgs e, EventHandler<StatisticsViewEventArgs> newEvent)
-        {
-            EventHandler<StatisticsViewEventArgs> eventHandler = newEvent;
-            if (eventHandler != null)
-            {
-                eventHandler(this, e);
-            }
-        }
 
         public void IncrementFinishedCombosNumber()
         {
             _finishedCombosNumber++;
-            OnComboReset( new StatisticsViewEventArgs(_finishedCombosNumber), ComboFinished);
+            _gameplayMediator.UpdateFinishedCombosNumber(_finishedCombosNumber);
         }
 
         public void IncrementBrokenCombosNumber() 
         {
             _brokenCombosNumber++;
-            OnComboReset(new StatisticsViewEventArgs(_brokenCombosNumber), ComboBroken);
+            _gameplayMediator.UpdateBrokenCombosNumber(_brokenCombosNumber);
         }
     }
 }

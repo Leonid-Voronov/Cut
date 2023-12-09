@@ -7,20 +7,20 @@ namespace Cut
     public class InstantPrepTimer : IPrepTimer
     {
         private ITimerUpdater _timerUpdater;
-        private IPrepTimerDisplay _timerDisplay;
         private IComboHolder _comboHolder;
+        private IGameplayMediatorToUI _gameplayMediator;
 
         private float _prepTime;
         private float _remainingTime;
 
         [Inject]
-        public InstantPrepTimer(ITimerUpdater timerUpdater, GameConfigSO gameConfigSO, IPrepTimerDisplay prepTimerDisplay, IComboHolder comboHolder)
+        public InstantPrepTimer(ITimerUpdater timerUpdater, GameConfigSO gameConfigSO, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
         {
             _timerUpdater = timerUpdater;
             _prepTime = gameConfigSO.PrepTime;
             _remainingTime = _prepTime;
-            _timerDisplay = prepTimerDisplay;
-            _timerDisplay.DisplayTimer(_remainingTime, _prepTime);
+            _gameplayMediator = gameplayMediator;
+            _gameplayMediator.DisplayTimer(_remainingTime, _prepTime);
             _comboHolder = comboHolder;
             _timerUpdater.Subscribe(this);
 
@@ -31,7 +31,7 @@ namespace Cut
         public void UpdateTimer()
         {
             _remainingTime -= Time.deltaTime;
-            _timerDisplay.DisplayTimer(_remainingTime, _prepTime);
+            _gameplayMediator.DisplayTimer(_remainingTime, _prepTime);
 
             if (_remainingTime <= 0)
             {
@@ -42,7 +42,7 @@ namespace Cut
         public void Dispose()
         {
             _timerUpdater.Unsubscribe(this);
-            _timerDisplay.DisplayFull();
+            _gameplayMediator.DisplayFullTimer();
             Application.quitting -= Dispose;
         }
 

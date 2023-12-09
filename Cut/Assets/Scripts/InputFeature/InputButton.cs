@@ -7,7 +7,7 @@ namespace Cut
     public class InputButton : MonoBehaviour
     {
         [Inject]
-        public void Construct(GameplayMediator gameplayMediator)
+        public void Construct(IGameplayMediatorToLogic gameplayMediator)
         {
             _gameplayMediator = gameplayMediator;
         }
@@ -15,7 +15,7 @@ namespace Cut
         [SerializeField] private Button _button;
         [SerializeField] private int _buttonNumber;
 
-        private GameplayMediator _gameplayMediator;
+        private IGameplayMediatorToLogic _gameplayMediator;
 
         private void OnEnable()
         {

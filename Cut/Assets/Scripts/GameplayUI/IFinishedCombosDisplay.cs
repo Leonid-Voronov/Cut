@@ -2,6 +2,6 @@
 {
     public interface IFinishedCombosDisplay 
     {
-        void DisplayFinishedCombos(object sender, StatisticsViewEventArgs e);
+        void DisplayFinishedCombos(int statisticsNumber);
     }
 }

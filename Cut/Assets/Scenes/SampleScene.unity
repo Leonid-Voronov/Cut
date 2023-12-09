@@ -826,6 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 700460476}
   - component: {fileID: 700460477}
+  - component: {fileID: 700460478}
   m_Layer: 0
   m_Name: GameplayMediator
   m_TagString: Untagged
@@ -858,6 +859,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16615e8ff9cb24042aeee095feb941fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &700460478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700460475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26418b06494e507499720c126f13bae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &710660565
@@ -1737,10 +1750,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _templates: {fileID: 11400000, guid: 58843bb58980407458e9c9f827dd3fe1, type: 2}
   _buttonsHolder: {fileID: 11400000, guid: 6dc015b565a03414f855832a8f0b71bd, type: 2}
-  _gameConfig: {fileID: 11400000, guid: abc87d31b5e98aa488157c59c1215225, type: 2}
+  _gameConfig: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _comboDisplayer: {fileID: 2104256834}
   _prepTimerDisplay: {fileID: 1324998644}
-  _gameplayMediator: {fileID: 700460477}
+  _brokenCombosDisplay: {fileID: 1556409813}
+  _finishedCombosDisplay: {fileID: 930016648}
+  _gameplayMediatorToLogic: {fileID: 700460478}
+  _gameplayMediatorToUI: {fileID: 700460477}
   _timerUpdater: {fileID: 2092288003}
 --- !u!114 &1588366494
 MonoBehaviour:
