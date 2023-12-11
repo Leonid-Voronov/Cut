@@ -1,15 +1,19 @@
 using Zenject;
 using UnityEngine;
 using System.Threading;
+using System.Collections.Generic;
+using Assets.Scripts.GameModeFeature;
 
 namespace Cut.Infrastracture
 {
-    public class GameInstaller : MonoInstaller
+    public class GameInstaller : MonoInstaller<GameInstaller>
     {
         [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
-        [SerializeField] private GameConfigSO _gameConfig;
+        [SerializeField] private GameModeSO _unlimitedTimeMode;
+        [SerializeField] private GameModeSO _firstTapMode;
+        [SerializeField] private GameModeSO _instantMode;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
@@ -21,6 +25,7 @@ namespace Cut.Infrastracture
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private TimerUpdater _timerUpdater;
+        [SerializeField] private GameStarter _gameStarter;
 
         public override void InstallBindings()
         {
@@ -85,8 +90,8 @@ namespace Cut.Infrastracture
                 .To<ComboBreakerPrototype>()
                 .AsSingle();
 
-            Container.Bind<GameConfigSO>()
-                .FromInstance(_gameConfig)
+            Container.Bind<Dictionary<GameMode, GameModeSO>>()
+                .FromInstance(PackGameModesToDictionary())
                 .AsSingle();
 
             Container.Bind<IFactory<IPrepTimer>>()
@@ -107,8 +112,7 @@ namespace Cut.Infrastracture
 
             Container.Bind<ITimerHolder>()
                 .To<TimerHolder>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
 
             Container.Bind<IGameplayMediatorToLogic>()
                 .FromInstance(_gameplayMediatorToLogic)
@@ -126,11 +130,31 @@ namespace Cut.Infrastracture
                 .FromInstance(_finishedCombosDisplay)
                 .AsSingle();
 
+            Container.Bind<GameModeHolder>()
+                .To<GameModeHolder>()
+                .AsSingle();
+
+            Container.Bind<GameStarter>()
+                .FromInstance(_gameStarter)
+                .AsSingle()
+                .NonLazy();
+
             //Tests
 
             //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
             //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
 
+        }
+
+        private Dictionary<GameMode, GameModeSO> PackGameModesToDictionary()
+        {
+            Dictionary<GameMode, GameModeSO> gameModes = new Dictionary<GameMode, GameModeSO>
+            {
+                { GameMode.UnlimitedTime, _unlimitedTimeMode },
+                { GameMode.FirstTap, _firstTapMode },
+                { GameMode.Instant, _instantMode }
+            };
+            return gameModes;
         }
     }
 }

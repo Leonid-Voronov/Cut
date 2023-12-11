@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Cut
 {
     [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameModes", order = 3)]
-    public class GameConfigSO : ScriptableObject
+    public class GameModeSO : ScriptableObject
     {
         [SerializeField] private float _prepTime;
         [SerializeField] private StartTimerCondition _startTimerCondition;

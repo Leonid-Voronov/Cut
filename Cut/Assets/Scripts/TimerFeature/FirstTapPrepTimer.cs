@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using Zenject;
 using UnityEngine;
+using Assets.Scripts.GameModeFeature;
 
 public class FirstTapPrepTimer : IPrepTimer
 {
@@ -14,12 +15,12 @@ public class FirstTapPrepTimer : IPrepTimer
     private float _remainingTime;
 
     [Inject]
-    public FirstTapPrepTimer(GameConfigSO gameConfig, ITimerUpdater timerUpdater, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
+    public FirstTapPrepTimer(GameModeHolder gameModeHolder, ITimerUpdater timerUpdater, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
     {
         _timerUpdater = timerUpdater;
         _comboHolder = comboHolder;
         _gameplayMediator = gameplayMediator;
-        _prepTime = gameConfig.PrepTime;
+        _prepTime = gameModeHolder.CurrentGameMode.PrepTime;
         _remainingTime = _prepTime;
         _timerUpdater.Subscribe(this);
         Application.quitting += Dispose;

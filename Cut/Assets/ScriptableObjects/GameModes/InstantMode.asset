@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ddfe2599b3a5d4b9fca9655ea65657, type: 3}
+  m_Script: {fileID: 11500000, guid: 9afaf2b6b7cc5a14b9731817ddc5c1f1, type: 3}
   m_Name: InstantMode
   m_EditorClassIdentifier: 
   _prepTime: 4

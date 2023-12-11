@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameModeFeature;
 
 namespace Cut
 {
@@ -10,15 +11,15 @@ namespace Cut
 
         private IComboBreaker _comboBreaker;
         private IComboFinisher _comboFinisher;
-        private GameConfigSO _gameConfigSO;
+        private GameModeHolder _gameModeHolder;
         private IComboHolder _comboHolder;
         private IComboDisplay _comboDisplay;
         private IFactory<IPrepTimer> _timerFactory;
 
         [Inject]
-        public TimerHolder(GameConfigSO gameConfigSO, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory)
+        public TimerHolder(GameModeHolder gameModeHolder, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory)
         {
-            _gameConfigSO = gameConfigSO;
+            _gameModeHolder = gameModeHolder;
             _comboFinisher = comboFinisher;
             _comboBreaker = comboBreaker;
             _comboHolder = comboHolder;
@@ -28,8 +29,11 @@ namespace Cut
             _comboFinisher.ComboFinished += DeleteCurrentTimer;
             _comboBreaker.ComboBroken += DeleteCurrentTimer;
             Application.quitting += Dispose;
+        }
 
-            switch (_gameConfigSO.StartTimerCondition)
+        public void SubscribeToStartCondition()
+        {
+            switch (_gameModeHolder.CurrentGameMode.StartTimerCondition)
             {
                 case StartTimerCondition.ComboStarted:
                     _comboHolder.ComboStarted += CreateTimer;
@@ -57,7 +61,7 @@ namespace Cut
 
         private void Dispose()
         {
-            switch (_gameConfigSO.StartTimerCondition)
+            switch (_gameModeHolder.CurrentGameMode.StartTimerCondition)
             {
                 case StartTimerCondition.ComboStarted:
                     _comboHolder.ComboStarted -= CreateTimer;
