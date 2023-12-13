@@ -177,6 +177,8 @@ namespace Cut.Infrastracture
                 .FromInstance(_gameMediator)
                 .AsSingle();
 
+
+
             //Tests
 
             //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();

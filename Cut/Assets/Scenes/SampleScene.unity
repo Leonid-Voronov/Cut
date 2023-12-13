@@ -348,10 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 503776132}
   - component: {fileID: 503776131}
   m_Layer: 5
-  m_Name: Image
+  m_Name: GameSettingsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,10 +505,10 @@ RectTransform:
   m_Father: {fileID: 1597391897}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.343375, y: 0}
+  m_AnchorMax: {x: 0.6566249, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: -2, y: -281}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &503776131
 MonoBehaviour:
@@ -1262,6 +1262,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1ff52dffec8c44e9710c15533aa5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &927842750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 927842751}
+  - component: {fileID: 927842752}
+  m_Layer: 0
+  m_Name: MetagameMediator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &927842751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927842750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1255596562}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927842752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927842750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d880a97ae9efbb41a23a8dd0cb5bd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930016644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1734,7 @@ Transform:
   - {fileID: 847961132}
   - {fileID: 700460476}
   - {fileID: 739910511}
+  - {fileID: 927842751}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1761,7 +1806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1551772558
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1926,7 +1971,7 @@ MonoBehaviour:
   _firstTapMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _instantMode: {fileID: 11400000, guid: abc87d31b5e98aa488157c59c1215225, type: 2}
   _defaultGameMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
-  _gameConfig: {fileID: 11400000, guid: 6fe95930dbd3fa74383a608eb058e1b3, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 93a30679a98c69c4189a239d054bc246, type: 2}
   _comboDisplayer: {fileID: 2104256834}
   _prepTimerDisplay: {fileID: 1324998644}
   _brokenCombosDisplay: {fileID: 1556409813}
