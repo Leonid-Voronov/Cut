@@ -3,6 +3,9 @@ using UnityEngine;
 using System.Threading;
 using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
+using Assets.Scripts;
+using Assets.Scripts.TagComponents;
+using Assets.Scripts.UI;
 
 namespace Cut.Infrastracture
 {
@@ -14,6 +17,8 @@ namespace Cut.Infrastracture
         [SerializeField] private GameModeSO _unlimitedTimeMode;
         [SerializeField] private GameModeSO _firstTapMode;
         [SerializeField] private GameModeSO _instantMode;
+        [SerializeField] private GameModeSO _defaultGameMode;
+        [SerializeField] private GameConfigSO _gameConfig;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
@@ -21,11 +26,16 @@ namespace Cut.Infrastracture
         [SerializeField] private BrokenCombosDisplay _brokenCombosDisplay;
         [SerializeField] private FinishedCombosDisplay _finishedCombosDisplay;
 
+        [Header("Objects")]
+        [SerializeField] private GameplayUI _gameplayUI;
+        [SerializeField] private MetagameUI _metagameUI;
+
         [Header("Monobehaviours")]
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private TimerUpdater _timerUpdater;
-        [SerializeField] private GameStarter _gameStarter;
+        [SerializeField] private AppStarter _appStarter;
+        [SerializeField] private GameMediator _gameMediator;
 
         public override void InstallBindings()
         {
@@ -135,9 +145,37 @@ namespace Cut.Infrastracture
                 .AsSingle();
 
             Container.Bind<GameStarter>()
-                .FromInstance(_gameStarter)
+                .To<GameStarter>()
+                .AsSingle();
+
+            Container.Bind<GameModeSO>()
+                .FromInstance(_defaultGameMode)
+                .AsSingle();
+
+            Container.Bind<GameConfigSO>()
+                .FromInstance(_gameConfig)
+                .AsSingle();
+
+            Container.Bind<GameplayUI>()
+                .FromInstance(_gameplayUI)
+                .AsSingle();
+
+            Container.Bind<MetagameUI>()
+                .FromInstance(_metagameUI)
+                .AsSingle();
+
+            Container.Bind<AppStarter>()
+                .FromInstance(_appStarter)
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<IUIInitializer>()
+                .To<UIInitializer>()
+                .AsSingle();
+
+            Container.Bind<GameMediator>()
+                .FromInstance(_gameMediator)
+                .AsSingle();
 
             //Tests
 

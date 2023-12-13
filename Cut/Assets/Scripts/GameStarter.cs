@@ -3,19 +3,19 @@ using Zenject;
 
 namespace Cut
 {
-    public class GameStarter : MonoBehaviour
+    public class GameStarter
     {
         private IComboSwitcher _comboSwitcher;
         private ITimerHolder _timerHolder;
 
         [Inject]
-        public void Construct(IComboSwitcher comboSwitcher, ITimerHolder timerHolder)
+        public GameStarter(IComboSwitcher comboSwitcher, ITimerHolder timerHolder)
         {
             _comboSwitcher = comboSwitcher;
             _timerHolder = timerHolder;
         }
 
-        private void Start()
+        public void StartGame()
         {
             _timerHolder.SubscribeToStartCondition();
             _comboSwitcher.SwitchCombo();

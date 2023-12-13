@@ -11,10 +11,10 @@ namespace Assets.Scripts.GameModeFeature
         public GameModeSO CurrentGameMode => _currentGameMode;
 
         [Inject]
-        public GameModeHolder(Dictionary<GameMode, GameModeSO> gameModes)
+        public GameModeHolder(Dictionary<GameMode, GameModeSO> gameModes, GameModeSO defaultGameMode)
         {
             _gameModes = gameModes;
-            _currentGameMode = _gameModes[GameMode.FirstTap];
+            _currentGameMode = defaultGameMode;
         }
 
         private void SetCurrentGameMode(object sender, GameModeSetEventArgs e)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Cut
 {
-    [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameModes", order = 3)]
+    [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameMode", order = 3)]
     public class GameModeSO : ScriptableObject
     {
         [SerializeField] private float _prepTime;
