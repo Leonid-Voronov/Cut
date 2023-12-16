@@ -20,13 +20,13 @@ public class GameMediator : MonoBehaviour
         _metagameUI.gameObject.SetActive(false);
     }
 
-    public void InitializeGameplayUI()
+    public void SwitchToGameplayUI()
     {
         DisableAllUI();
         _gameplayUI.gameObject.SetActive(true);
     }
 
-    public void InitializeMetagameUI()
+    public void SwitchToMetagameUI()
     {
         DisableAllUI();
         _metagameUI.gameObject.SetActive(true);

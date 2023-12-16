@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI.MetagameUI
     {
         [SerializeField] private TMP_Dropdown _dropdown;
         private MetagameMediatorToLogic _metagameMediatorToLogic;
-
+        private GameConfigSO _gameConfigSO;
         private int _previousValue;
 
         private Dictionary<int, GameMode> _gameModes =
@@ -21,15 +21,18 @@ namespace Assets.Scripts.UI.MetagameUI
             };
 
         [Inject]
-        public void Construct(MetagameMediatorToLogic metagameMediatorToLogic)
+        public void Construct(MetagameMediatorToLogic metagameMediatorToLogic, GameConfigSO gameConfigSO)
         {
             _metagameMediatorToLogic = metagameMediatorToLogic;
+            _gameConfigSO = gameConfigSO;
         }
 
         private void OnEnable() 
         {
             _dropdown.onValueChanged.AddListener( delegate { SetGamemode(_dropdown); } );
-            _metagameMediatorToLogic.SetNewGameMode(_gameModes[_dropdown.value]);
+
+            if (_gameConfigSO.StartMode == StartMode.GameSettingsWindow)
+                _metagameMediatorToLogic.SetNewGameMode(_gameModes[_dropdown.value]);
         }
 
         private void SetGamemode(TMP_Dropdown change)

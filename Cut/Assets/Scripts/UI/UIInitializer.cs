@@ -18,13 +18,13 @@ namespace Assets.Scripts.UI
             switch (_gameConfigSO.StartMode)
             {
                 case StartMode.GameSettingsWindow:
-                    _gameMediator.InitializeMetagameUI();
+                    _gameMediator.SwitchToMetagameUI();
                     break;
                 case StartMode.Gameplay:
-                    _gameMediator.InitializeGameplayUI();
+                    _gameMediator.SwitchToGameplayUI();
                     break;
                 default :
-                    _gameMediator.InitializeGameplayUI();
+                    _gameMediator.SwitchToGameplayUI();
                     break;
             }
         }
