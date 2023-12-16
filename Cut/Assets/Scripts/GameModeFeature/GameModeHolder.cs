@@ -21,6 +21,11 @@ namespace Assets.Scripts.GameModeFeature
         {
             _currentGameMode = _gameModes[e.GameMode];
         }
+
+        public void SetCurrentGameMode(GameMode newGameModeName)
+        {
+            _currentGameMode = _gameModes[newGameModeName];
+        }
     }
 }
 

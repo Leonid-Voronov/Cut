@@ -2185,6 +2185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927842751}
   - component: {fileID: 927842752}
+  - component: {fileID: 927842753}
   m_Layer: 0
   m_Name: MetagameMediator
   m_TagString: Untagged
@@ -2217,6 +2218,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d880a97ae9efbb41a23a8dd0cb5bd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &927842753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927842750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d167a39b179774db62dccb685701a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &930016644
@@ -2919,6 +2932,7 @@ GameObject:
   - component: {fileID: 1331397441}
   - component: {fileID: 1331397440}
   - component: {fileID: 1331397439}
+  - component: {fileID: 1331397442}
   m_Layer: 5
   m_Name: GameModeDropdown
   m_TagString: Untagged
@@ -3046,6 +3060,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331397437}
   m_CullTransparentMesh: 1
+--- !u!114 &1331397442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331397437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4546522bc475b46b10ea66c105088a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropdown: {fileID: 1331397439}
 --- !u!1 &1396136532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,6 +3464,8 @@ MonoBehaviour:
   _metagameUI: {fileID: 1597391898}
   _gameplayMediatorToLogic: {fileID: 700460478}
   _gameplayMediatorToUI: {fileID: 700460477}
+  _metagameMediatorToLogic: {fileID: 927842753}
+  _metagameMediatorToUI: {fileID: 927842752}
   _timerUpdater: {fileID: 2092288003}
   _appStarter: {fileID: 847961133}
   _gameMediator: {fileID: 739910512}

@@ -6,6 +6,7 @@ using Assets.Scripts.GameModeFeature;
 using Assets.Scripts;
 using Assets.Scripts.TagComponents;
 using Assets.Scripts.UI;
+using Assets.Scripts.UI.MetagameUI;
 
 namespace Cut.Infrastracture
 {
@@ -33,6 +34,8 @@ namespace Cut.Infrastracture
         [Header("Monobehaviours")]
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
+        [SerializeField] private MetagameMediatorToLogic _metagameMediatorToLogic;
+        [SerializeField] private MetagameMediatorToUI _metagameMediatorToUI;
         [SerializeField] private TimerUpdater _timerUpdater;
         [SerializeField] private AppStarter _appStarter;
         [SerializeField] private GameMediator _gameMediator;
@@ -177,7 +180,13 @@ namespace Cut.Infrastracture
                 .FromInstance(_gameMediator)
                 .AsSingle();
 
+            Container.Bind<MetagameMediatorToLogic>()
+                .FromInstance(_metagameMediatorToLogic)
+                .AsSingle();
 
+            Container.Bind<MetagameMediatorToUI>()
+                .FromInstance(_metagameMediatorToUI)
+                .AsSingle();
 
             //Tests
 
