@@ -3,13 +3,14 @@ using TMPro;
 using Zenject;
 using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
+using Assets.Scripts;
 
-namespace Assets.Scripts.UI.MetagameUI
+namespace UI.MetagameUI
 {
     public class GameModeDropdown : MonoBehaviour
     {
         [SerializeField] private TMP_Dropdown _dropdown;
-        private MetagameMediatorToLogic _metagameMediatorToLogic;
+        private IMetagameMediatorToLogic _metagameMediatorToLogic;
         private GameConfigSO _gameConfigSO;
         private int _previousValue;
 
@@ -21,7 +22,7 @@ namespace Assets.Scripts.UI.MetagameUI
             };
 
         [Inject]
-        public void Construct(MetagameMediatorToLogic metagameMediatorToLogic, GameConfigSO gameConfigSO)
+        public void Construct(IMetagameMediatorToLogic metagameMediatorToLogic, GameConfigSO gameConfigSO)
         {
             _metagameMediatorToLogic = metagameMediatorToLogic;
             _gameConfigSO = gameConfigSO;

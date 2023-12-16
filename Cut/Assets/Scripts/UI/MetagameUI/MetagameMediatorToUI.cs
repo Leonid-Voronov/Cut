@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.UI.MetagameUI
+namespace UI.MetagameUI
 {
-    public class MetagameMediatorToUI : MonoBehaviour
+    public class MetagameMediatorToUI : MonoBehaviour, IMetagameMediatorToUI
     {
         public void Construct()
         {

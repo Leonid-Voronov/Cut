@@ -1,12 +1,14 @@
 using Zenject;
 using UnityEngine;
-using System.Threading;
 using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
 using Assets.Scripts;
 using Assets.Scripts.TagComponents;
 using Assets.Scripts.UI;
-using Assets.Scripts.UI.MetagameUI;
+using Assets.Scripts.StatisticsFeature;
+using TimerFeature;
+using UI.GameplayUI;
+using UI.MetagameUI;
 
 namespace Cut.Infrastracture
 {
@@ -180,12 +182,16 @@ namespace Cut.Infrastracture
                 .FromInstance(_gameMediator)
                 .AsSingle();
 
-            Container.Bind<MetagameMediatorToLogic>()
+            Container.Bind<IMetagameMediatorToLogic>()
                 .FromInstance(_metagameMediatorToLogic)
                 .AsSingle();
 
-            Container.Bind<MetagameMediatorToUI>()
+            Container.Bind<IMetagameMediatorToUI>()
                 .FromInstance(_metagameMediatorToUI)
+                .AsSingle();
+
+            Container.Bind<IGameReseter>()
+                .To<GameReseter>()
                 .AsSingle();
 
             //Tests

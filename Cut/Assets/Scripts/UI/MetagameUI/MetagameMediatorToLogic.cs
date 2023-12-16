@@ -3,9 +3,9 @@ using Cut;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.UI.MetagameUI
+namespace  UI.MetagameUI
 {
-    public class MetagameMediatorToLogic : MonoBehaviour
+    public class MetagameMediatorToLogic : MonoBehaviour, IMetagameMediatorToLogic
     {
         private GameModeHolder _gameModeHolder;
         private GameStarter _gameStarter;

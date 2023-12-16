@@ -1,6 +1,7 @@
 ﻿using System;
 using Zenject;
 using Assets.Scripts.GameModeFeature;
+using Assets.Scripts.StatisticsFeature;
 
 namespace Cut
 {

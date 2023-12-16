@@ -2,8 +2,10 @@
 using UnityEngine;
 using Zenject;
 using Assets.Scripts.GameModeFeature;
+using Assets.Scripts;
+using Cut;
 
-namespace Cut
+namespace TimerFeature
 {
     public class TimerHolder : ITimerHolder
     {
@@ -15,9 +17,10 @@ namespace Cut
         private IComboHolder _comboHolder;
         private IComboDisplay _comboDisplay;
         private IFactory<IPrepTimer> _timerFactory;
+        private IGameReseter _gameReseter;
 
         [Inject]
-        public TimerHolder(GameModeHolder gameModeHolder, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory)
+        public TimerHolder(GameModeHolder gameModeHolder, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory, IGameReseter gameReseter)
         {
             _gameModeHolder = gameModeHolder;
             _comboFinisher = comboFinisher;
@@ -25,9 +28,12 @@ namespace Cut
             _comboHolder = comboHolder;
             _comboDisplay = comboDisplay;
             _timerFactory = timerFactory;
+            _gameReseter = gameReseter;
 
             _comboFinisher.ComboFinished += DeleteCurrentTimer;
             _comboBreaker.ComboBroken += DeleteCurrentTimer;
+            _gameReseter.GameReset += DeleteCurrentTimer;
+            _gameReseter.GameReset += UnsubscribeEventRecevier;
             Application.quitting += Dispose;
         }
 
@@ -59,7 +65,7 @@ namespace Cut
             }
         }
 
-        private void Dispose()
+        private void UnsubscribeFromStartCondition()
         {
             switch (_gameModeHolder.CurrentGameMode.StartTimerCondition)
             {
@@ -71,10 +77,22 @@ namespace Cut
                     _comboDisplay.ComboSeen -= CreateTimer;
                     break;
             }
+        }
 
+        private void UnsubscribeEventRecevier(object sender, EventArgs e)
+        {
+            UnsubscribeFromStartCondition();
+        }
+
+        private void Dispose()
+        {
+            UnsubscribeFromStartCondition();
             _comboFinisher.ComboFinished -= DeleteCurrentTimer;
             _comboBreaker.ComboBroken -= DeleteCurrentTimer;
+            _gameReseter.GameReset -= DeleteCurrentTimer;
+            _gameReseter.GameReset -= UnsubscribeEventRecevier;
             Application.quitting -= Dispose;
         }
     }
 }
+

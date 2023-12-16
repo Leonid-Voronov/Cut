@@ -2,14 +2,14 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.UI.MetagameUI
+namespace UI.MetagameUI
 {
     public class StartGameButton : MonoBehaviour
     {
         [SerializeField] private Button _button;
-        private MetagameMediatorToLogic _metagameMediatorToLogic;
+        private IMetagameMediatorToLogic _metagameMediatorToLogic;
         [Inject]
-        public void Construct(MetagameMediatorToLogic metagameMediatorToLogic)
+        public void Construct(IMetagameMediatorToLogic metagameMediatorToLogic)
         {
             _metagameMediatorToLogic = metagameMediatorToLogic;
         }
