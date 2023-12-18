@@ -22,7 +22,7 @@ namespace GameplayVisualsFeature
 
         public void SwitchGameplayVisualsOnScene()
         {
-            _environmentObjectsDestroyer.DestroyEnvironmentObjects(_gameplayZoneTransform);
+            _environmentObjectsDestroyer.DestroyEnvironmentObjects();
             CreateNewEnvironment();
         }
 

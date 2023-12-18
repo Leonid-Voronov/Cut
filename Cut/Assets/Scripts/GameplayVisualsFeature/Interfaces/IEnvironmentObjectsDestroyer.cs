@@ -4,6 +4,6 @@ namespace GameplayVisualsFeature
 {
     public interface IEnvironmentObjectsDestroyer 
     {
-        public void DestroyEnvironmentObjects(Transform parentTransform);
+        public void DestroyEnvironmentObjects();
     }
 }
