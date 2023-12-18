@@ -9,6 +9,8 @@ using Assets.Scripts.StatisticsFeature;
 using TimerFeature;
 using UI.GameplayUI;
 using UI.MetagameUI;
+using GameplayVisualsFeature;
+using TagComponents;
 
 namespace Cut.Infrastracture
 {
@@ -17,11 +19,15 @@ namespace Cut.Infrastracture
         [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
+        [SerializeField] private GameConfigSO _gameConfig;
+        [SerializeField] private VisualsPresetSO _gameplayVisuals;
+        [SerializeField] private VisualsPresetSO _defaultGameplayVisuals;
+
+        [Header("Game modes")]
         [SerializeField] private GameModeSO _unlimitedTimeMode;
         [SerializeField] private GameModeSO _firstTapMode;
         [SerializeField] private GameModeSO _instantMode;
         [SerializeField] private GameModeSO _defaultGameMode;
-        [SerializeField] private GameConfigSO _gameConfig;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
@@ -32,14 +38,19 @@ namespace Cut.Infrastracture
         [Header("Objects")]
         [SerializeField] private GameplayUI _gameplayUI;
         [SerializeField] private MetagameUI _metagameUI;
+        [SerializeField] private GameplayZone _gameplayZone;
 
         [Header("Monobehaviours")]
+        
+        [SerializeField] private TimerUpdater _timerUpdater;
+        [SerializeField] private AppStarter _appStarter;
+        [SerializeField] private EnvironmentScaleHolder _environmentScaleHolder;
+
+        [Header ("Mediators")]
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private MetagameMediatorToLogic _metagameMediatorToLogic;
         [SerializeField] private MetagameMediatorToUI _metagameMediatorToUI;
-        [SerializeField] private TimerUpdater _timerUpdater;
-        [SerializeField] private AppStarter _appStarter;
         [SerializeField] private GameMediator _gameMediator;
 
         public override void InstallBindings()
@@ -194,6 +205,38 @@ namespace Cut.Infrastracture
                 .To<GameReseter>()
                 .AsSingle();
 
+            Container.Bind<IScaleHolder>()
+                .FromInstance(_environmentScaleHolder)
+                .AsSingle();
+
+            Container.Bind<Dictionary<VisualPresetName, VisualsPresetSO>>()
+                .FromInstance(PackGameplayVisualsToDictionary())
+                .AsSingle();
+
+            Container.Bind<VisualsPresetSO>()
+                .FromInstance(_defaultGameplayVisuals)
+                .AsSingle();
+
+            Container.Bind<IGameplayZone>()
+                .FromInstance(_gameplayZone)
+                .AsSingle();
+
+            Container.Bind<IEnvironmentObjectsDestroyer>()
+                .To<EnvironmentObjectsDestroyer>()
+                .AsSingle();
+
+            Container.Bind<GameplayVisualsSetter>()
+                .To<GameplayVisualsSetter>()
+                .AsSingle();
+
+            Container.Bind<VisualsPresetHolder>()
+                .To<VisualsPresetHolder>()
+                .AsSingle();
+
+            Container.Bind<IEnvironmentFramer>()
+                .To<EnvironmentFramer>()
+                .AsSingle();
+
             //Tests
 
             //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
@@ -210,6 +253,15 @@ namespace Cut.Infrastracture
                 { GameMode.Instant, _instantMode }
             };
             return gameModes;
+        }
+
+        private Dictionary<VisualPresetName, VisualsPresetSO> PackGameplayVisualsToDictionary()
+        {
+            Dictionary<VisualPresetName, VisualsPresetSO> gameplayVisuals = new Dictionary<VisualPresetName, VisualsPresetSO>
+            {
+                { VisualPresetName.Default, _gameplayVisuals }
+            };
+            return gameplayVisuals;
         }
     }
 }

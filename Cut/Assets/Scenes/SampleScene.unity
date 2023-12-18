@@ -3737,23 +3737,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _templates: {fileID: 11400000, guid: 58843bb58980407458e9c9f827dd3fe1, type: 2}
   _buttonsHolder: {fileID: 11400000, guid: 6dc015b565a03414f855832a8f0b71bd, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 93a30679a98c69c4189a239d054bc246, type: 2}
+  _gameplayVisuals: {fileID: 11400000, guid: 8025e0554215b214bacee95a7cadfba1, type: 2}
+  _defaultGameplayVisuals: {fileID: 11400000, guid: 8025e0554215b214bacee95a7cadfba1, type: 2}
   _unlimitedTimeMode: {fileID: 11400000, guid: 11ce0ab02ffafd1438e6f80f5b4e4cb9, type: 2}
   _firstTapMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _instantMode: {fileID: 11400000, guid: abc87d31b5e98aa488157c59c1215225, type: 2}
   _defaultGameMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
-  _gameConfig: {fileID: 11400000, guid: 93a30679a98c69c4189a239d054bc246, type: 2}
   _comboDisplayer: {fileID: 2104256834}
   _prepTimerDisplay: {fileID: 1324998644}
   _brokenCombosDisplay: {fileID: 1556409813}
   _finishedCombosDisplay: {fileID: 930016648}
   _gameplayUI: {fileID: 1551772559}
   _metagameUI: {fileID: 1597391898}
+  _gameplayZone: {fileID: 1787832565}
+  _timerUpdater: {fileID: 2092288003}
+  _appStarter: {fileID: 847961133}
+  _environmentScaleHolder: {fileID: 1765273592}
   _gameplayMediatorToLogic: {fileID: 700460478}
   _gameplayMediatorToUI: {fileID: 700460477}
   _metagameMediatorToLogic: {fileID: 927842753}
   _metagameMediatorToUI: {fileID: 927842752}
-  _timerUpdater: {fileID: 2092288003}
-  _appStarter: {fileID: 847961133}
   _gameMediator: {fileID: 739910512}
 --- !u!114 &1588366494
 MonoBehaviour:
@@ -4169,7 +4173,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748031646}
   m_CullTransparentMesh: 1
---- !u!1 &1787832563
+--- !u!1 &1765273589
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4177,37 +4181,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1787832564}
-  - component: {fileID: 1787832565}
+  - component: {fileID: 1765273590}
+  - component: {fileID: 1765273591}
+  - component: {fileID: 1765273592}
   m_Layer: 0
-  m_Name: GameplayZone
+  m_Name: BackgroundScaleTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787832564
+  m_IsActive: 0
+--- !u!4 &1765273590
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787832563}
+  m_GameObject: {fileID: 1765273589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.00015, z: 0}
+  m_LocalScale: {x: 5.196616, y: 5.207863, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1787832564}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1787832565
+--- !u!212 &1765273591
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787832563}
+  m_GameObject: {fileID: 1765273589}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4242,17 +4247,75 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a40f527331910e84db54a46cda639c15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.42, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1765273592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765273589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4653704e5a58f4ea4c798ecbba66cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _testBackgroundTransform: {fileID: 1765273590}
+--- !u!1 &1787832563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787832564}
+  - component: {fileID: 1787832565}
+  m_Layer: 0
+  m_Name: GameplayZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1787832564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787832563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1765273590}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1787832565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787832563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bb6e1b5877c9e42b482bd0ed546d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1979992878
 PrefabInstance:
   m_ObjectHideFlags: 0
