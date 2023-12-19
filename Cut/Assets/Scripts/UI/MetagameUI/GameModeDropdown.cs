@@ -3,7 +3,7 @@ using TMPro;
 using Zenject;
 using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
-using Assets.Scripts;
+using Cut;
 
 namespace UI.MetagameUI
 {

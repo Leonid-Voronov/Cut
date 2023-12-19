@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
 using Assets.Scripts;
 using Assets.Scripts.TagComponents;
-using Assets.Scripts.UI;
 using Assets.Scripts.StatisticsFeature;
 using TimerFeature;
 using UI.GameplayUI;
 using UI.MetagameUI;
 using GameplayVisualsFeature;
 using TagComponents;
+using UI.MetagameUI.Windows;
+using UI;
 
 namespace Cut.Infrastracture
 {
@@ -52,6 +53,10 @@ namespace Cut.Infrastracture
         [SerializeField] private MetagameMediatorToLogic _metagameMediatorToLogic;
         [SerializeField] private MetagameMediatorToUI _metagameMediatorToUI;
         [SerializeField] private GameMediator _gameMediator;
+
+        [Header("Windows")]
+        [SerializeField] private SettingsWindow _settingsWindow;
+        [SerializeField] private MenuWindow _menuWindow;
 
         public override void InstallBindings()
         {
@@ -235,6 +240,18 @@ namespace Cut.Infrastracture
 
             Container.Bind<IEnvironmentFramer>()
                 .To<EnvironmentFramer>()
+                .AsSingle();
+
+            Container.Bind<MenuWindow>()
+                .FromInstance(_menuWindow) 
+                .AsSingle();
+
+            Container.Bind<SettingsWindow>()
+                .FromInstance(_settingsWindow) 
+                .AsSingle();
+
+            Container.Bind<IWindowHolder>()
+                .To<MetagameWindowHolder>()
                 .AsSingle();
 
             //Tests

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Cut
 {
     [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/GameConfig", order = 4)]
     public class GameConfigSO : ScriptableObject

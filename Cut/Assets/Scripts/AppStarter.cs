@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.UI;
+﻿using UI;
 using Cut;
 using UnityEngine;
 using Zenject;
