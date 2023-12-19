@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameModeFeature;
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -14,10 +15,10 @@ namespace Cut
         private float _remainingTime;
 
         [Inject]
-        public InstantPrepTimer(ITimerUpdater timerUpdater, GameConfigSO gameConfigSO, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
+        public InstantPrepTimer(ITimerUpdater timerUpdater, GameModeHolder gameModeHolder, IComboHolder comboHolder, IGameplayMediatorToUI gameplayMediator)
         {
             _timerUpdater = timerUpdater;
-            _prepTime = gameConfigSO.PrepTime;
+            _prepTime = gameModeHolder.CurrentGameMode.PrepTime;
             _remainingTime = _prepTime;
             _gameplayMediator = gameplayMediator;
             _gameplayMediator.DisplayTimer(_remainingTime, _prepTime);

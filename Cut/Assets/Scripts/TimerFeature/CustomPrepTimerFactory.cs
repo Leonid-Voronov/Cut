@@ -1,6 +1,5 @@
-using System;
-using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameModeFeature;
 
 namespace Cut
 {
@@ -9,21 +8,20 @@ namespace Cut
         private UnlimitedPrepTimer.Factory _unlimitedTimerFactory;
         private FirstTapPrepTimer.Factory _firstTapTimerFactory;
         private InstantPrepTimer.Factory _instantPrepTimerFactory;
-        private GameConfigSO _gameConfigSO;
-
+        private GameModeHolder _gameModeHolder;
 
         [Inject]
-        public CustomPrepTimerFactory(GameConfigSO gameConfigSO, UnlimitedPrepTimer.Factory unlimitedTimerFactory, FirstTapPrepTimer.Factory firstTapTimerFactory, InstantPrepTimer.Factory instantTimerFactory)
+        public CustomPrepTimerFactory(GameModeHolder gameModeHolder, UnlimitedPrepTimer.Factory unlimitedTimerFactory, FirstTapPrepTimer.Factory firstTapTimerFactory, InstantPrepTimer.Factory instantTimerFactory)
         {
             _unlimitedTimerFactory = unlimitedTimerFactory;
             _firstTapTimerFactory = firstTapTimerFactory;
             _instantPrepTimerFactory = instantTimerFactory;
-            _gameConfigSO = gameConfigSO;
+            _gameModeHolder = gameModeHolder;
         }
 
         public IPrepTimer Create()
         {
-            switch( _gameConfigSO.StartTimerCondition ) 
+            switch( _gameModeHolder.CurrentGameMode.StartTimerCondition ) 
             {
                 case StartTimerCondition.Never:
                     return _unlimitedTimerFactory.Create();

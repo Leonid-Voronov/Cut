@@ -1,15 +1,34 @@
 using Zenject;
 using UnityEngine;
-using System.Threading;
+using System.Collections.Generic;
+using Assets.Scripts.GameModeFeature;
+using Assets.Scripts;
+using Assets.Scripts.TagComponents;
+using Assets.Scripts.StatisticsFeature;
+using TimerFeature;
+using UI.GameplayUI;
+using UI.MetagameUI;
+using GameplayVisualsFeature;
+using TagComponents;
+using UI.MetagameUI.Windows;
+using UI;
 
 namespace Cut.Infrastracture
 {
-    public class GameInstaller : MonoInstaller
+    public class GameInstaller : MonoInstaller<GameInstaller>
     {
         [Header("Scriptable objects")]
         [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
         [SerializeField] private GameConfigSO _gameConfig;
+        [SerializeField] private VisualsPresetSO _gameplayVisuals;
+        [SerializeField] private VisualsPresetSO _defaultGameplayVisuals;
+
+        [Header("Game modes")]
+        [SerializeField] private GameModeSO _unlimitedTimeMode;
+        [SerializeField] private GameModeSO _firstTapMode;
+        [SerializeField] private GameModeSO _instantMode;
+        [SerializeField] private GameModeSO _defaultGameMode;
 
         [Header("View")]
         [SerializeField] private ComboDisplay _comboDisplayer;
@@ -17,10 +36,27 @@ namespace Cut.Infrastracture
         [SerializeField] private BrokenCombosDisplay _brokenCombosDisplay;
         [SerializeField] private FinishedCombosDisplay _finishedCombosDisplay;
 
+        [Header("Objects")]
+        [SerializeField] private GameplayUI _gameplayUI;
+        [SerializeField] private MetagameUI _metagameUI;
+        [SerializeField] private GameplayZone _gameplayZone;
+
         [Header("Monobehaviours")]
+        
+        [SerializeField] private TimerUpdater _timerUpdater;
+        [SerializeField] private AppStarter _appStarter;
+        [SerializeField] private EnvironmentScaleHolder _environmentScaleHolder;
+
+        [Header ("Mediators")]
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
-        [SerializeField] private TimerUpdater _timerUpdater;
+        [SerializeField] private MetagameMediatorToLogic _metagameMediatorToLogic;
+        [SerializeField] private MetagameMediatorToUI _metagameMediatorToUI;
+        [SerializeField] private GameMediator _gameMediator;
+
+        [Header("Windows")]
+        [SerializeField] private SettingsWindow _settingsWindow;
+        [SerializeField] private MenuWindow _menuWindow;
 
         public override void InstallBindings()
         {
@@ -85,8 +121,8 @@ namespace Cut.Infrastracture
                 .To<ComboBreakerPrototype>()
                 .AsSingle();
 
-            Container.Bind<GameConfigSO>()
-                .FromInstance(_gameConfig)
+            Container.Bind<Dictionary<GameMode, GameModeSO>>()
+                .FromInstance(PackGameModesToDictionary())
                 .AsSingle();
 
             Container.Bind<IFactory<IPrepTimer>>()
@@ -107,8 +143,7 @@ namespace Cut.Infrastracture
 
             Container.Bind<ITimerHolder>()
                 .To<TimerHolder>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
 
             Container.Bind<IGameplayMediatorToLogic>()
                 .FromInstance(_gameplayMediatorToLogic)
@@ -126,11 +161,124 @@ namespace Cut.Infrastracture
                 .FromInstance(_finishedCombosDisplay)
                 .AsSingle();
 
+            Container.Bind<GameModeHolder>()
+                .To<GameModeHolder>()
+                .AsSingle();
+
+            Container.Bind<GameStarter>()
+                .To<GameStarter>()
+                .AsSingle();
+
+            Container.Bind<GameModeSO>()
+                .FromInstance(_defaultGameMode)
+                .AsSingle();
+
+            Container.Bind<GameConfigSO>()
+                .FromInstance(_gameConfig)
+                .AsSingle();
+
+            Container.Bind<GameplayUI>()
+                .FromInstance(_gameplayUI)
+                .AsSingle();
+
+            Container.Bind<MetagameUI>()
+                .FromInstance(_metagameUI)
+                .AsSingle();
+
+            Container.Bind<AppStarter>()
+                .FromInstance(_appStarter)
+                .AsSingle()
+                .NonLazy();
+
+            Container.Bind<IUIInitializer>()
+                .To<UIInitializer>()
+                .AsSingle();
+
+            Container.Bind<GameMediator>()
+                .FromInstance(_gameMediator)
+                .AsSingle();
+
+            Container.Bind<IMetagameMediatorToLogic>()
+                .FromInstance(_metagameMediatorToLogic)
+                .AsSingle();
+
+            Container.Bind<IMetagameMediatorToUI>()
+                .FromInstance(_metagameMediatorToUI)
+                .AsSingle();
+
+            Container.Bind<IGameReseter>()
+                .To<GameReseter>()
+                .AsSingle();
+
+            Container.Bind<IScaleHolder>()
+                .FromInstance(_environmentScaleHolder)
+                .AsSingle();
+
+            Container.Bind<Dictionary<VisualPresetName, VisualsPresetSO>>()
+                .FromInstance(PackGameplayVisualsToDictionary())
+                .AsSingle();
+
+            Container.Bind<VisualsPresetSO>()
+                .FromInstance(_defaultGameplayVisuals)
+                .AsSingle();
+
+            Container.Bind<IGameplayZone>()
+                .FromInstance(_gameplayZone)
+                .AsSingle();
+
+            Container.Bind<IEnvironmentObjectsDestroyer>()
+                .To<EnvironmentObjectsDestroyer>()
+                .AsSingle();
+
+            Container.Bind<GameplayVisualsSetter>()
+                .To<GameplayVisualsSetter>()
+                .AsSingle();
+
+            Container.Bind<VisualsPresetHolder>()
+                .To<VisualsPresetHolder>()
+                .AsSingle();
+
+            Container.Bind<IEnvironmentFramer>()
+                .To<EnvironmentFramer>()
+                .AsSingle();
+
+            Container.Bind<MenuWindow>()
+                .FromInstance(_menuWindow) 
+                .AsSingle();
+
+            Container.Bind<SettingsWindow>()
+                .FromInstance(_settingsWindow) 
+                .AsSingle();
+
+            Container.Bind<IWindowHolder>()
+                .To<MetagameWindowHolder>()
+                .AsSingle();
+
             //Tests
 
             //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
             //Container.Bind<IComboGeneratorTest>().To<ComboGeneratorTest>().AsSingle().NonLazy();
 
+        }
+
+        private Dictionary<GameMode, GameModeSO> PackGameModesToDictionary()
+        {
+            Dictionary<GameMode, GameModeSO> gameModes = new Dictionary<GameMode, GameModeSO>
+            {
+                { GameMode.UnlimitedTime, _unlimitedTimeMode },
+                { GameMode.FirstTap, _firstTapMode },
+                { GameMode.Instant, _instantMode }
+            };
+            return gameModes;
+        }
+
+        private Dictionary<VisualPresetName, VisualsPresetSO> PackGameplayVisualsToDictionary()
+        {
+            Dictionary<VisualPresetName, VisualsPresetSO> gameplayVisuals = new Dictionary<VisualPresetName, VisualsPresetSO>
+            {
+                { VisualPresetName.Default, _gameplayVisuals }
+            };
+            return gameplayVisuals;
         }
     }
 }

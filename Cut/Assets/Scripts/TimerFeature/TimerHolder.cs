@@ -1,8 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameModeFeature;
+using Assets.Scripts;
+using Cut;
 
-namespace Cut
+namespace TimerFeature
 {
     public class TimerHolder : ITimerHolder
     {
@@ -10,26 +13,33 @@ namespace Cut
 
         private IComboBreaker _comboBreaker;
         private IComboFinisher _comboFinisher;
-        private GameConfigSO _gameConfigSO;
+        private GameModeHolder _gameModeHolder;
         private IComboHolder _comboHolder;
         private IComboDisplay _comboDisplay;
         private IFactory<IPrepTimer> _timerFactory;
+        private IGameReseter _gameReseter;
 
         [Inject]
-        public TimerHolder(GameConfigSO gameConfigSO, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory)
+        public TimerHolder(GameModeHolder gameModeHolder, IComboFinisher comboFinisher, IComboBreaker comboBreaker, IComboHolder comboHolder, IComboDisplay comboDisplay, IFactory<IPrepTimer> timerFactory, IGameReseter gameReseter)
         {
-            _gameConfigSO = gameConfigSO;
+            _gameModeHolder = gameModeHolder;
             _comboFinisher = comboFinisher;
             _comboBreaker = comboBreaker;
             _comboHolder = comboHolder;
             _comboDisplay = comboDisplay;
             _timerFactory = timerFactory;
+            _gameReseter = gameReseter;
 
             _comboFinisher.ComboFinished += DeleteCurrentTimer;
             _comboBreaker.ComboBroken += DeleteCurrentTimer;
+            _gameReseter.GameReset += DeleteCurrentTimer;
+            _gameReseter.GameReset += UnsubscribeEventRecevier;
             Application.quitting += Dispose;
+        }
 
-            switch (_gameConfigSO.StartTimerCondition)
+        public void SubscribeToStartCondition()
+        {
+            switch (_gameModeHolder.CurrentGameMode.StartTimerCondition)
             {
                 case StartTimerCondition.ComboStarted:
                     _comboHolder.ComboStarted += CreateTimer;
@@ -55,9 +65,9 @@ namespace Cut
             }
         }
 
-        private void Dispose()
+        private void UnsubscribeFromStartCondition()
         {
-            switch (_gameConfigSO.StartTimerCondition)
+            switch (_gameModeHolder.CurrentGameMode.StartTimerCondition)
             {
                 case StartTimerCondition.ComboStarted:
                     _comboHolder.ComboStarted -= CreateTimer;
@@ -67,10 +77,22 @@ namespace Cut
                     _comboDisplay.ComboSeen -= CreateTimer;
                     break;
             }
+        }
 
+        private void UnsubscribeEventRecevier(object sender, EventArgs e)
+        {
+            UnsubscribeFromStartCondition();
+        }
+
+        private void Dispose()
+        {
+            UnsubscribeFromStartCondition();
             _comboFinisher.ComboFinished -= DeleteCurrentTimer;
             _comboBreaker.ComboBroken -= DeleteCurrentTimer;
+            _gameReseter.GameReset -= DeleteCurrentTimer;
+            _gameReseter.GameReset -= UnsubscribeEventRecevier;
             Application.quitting -= Dispose;
         }
     }
 }
+

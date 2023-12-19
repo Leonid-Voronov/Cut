@@ -1,21 +1,23 @@
 ﻿using System;
 using Zenject;
+using Assets.Scripts.GameModeFeature;
+using Assets.Scripts.StatisticsFeature;
 
 namespace Cut
 {
     public class ComboBreakerPrototype : IComboBreaker
     {
         private SessionStatistics _sessionStatistics;
-        private GameConfigSO _gameConfigSO;
+        private GameModeHolder _gameModeHolder;
         private IComboSwitcher _comboSwitcher;
 
         public event EventHandler ComboBroken;
 
         [Inject]
-        public ComboBreakerPrototype(SessionStatistics sessionStatistics, GameConfigSO gameConfigSO, IComboSwitcher comboSwitcher)
+        public ComboBreakerPrototype(SessionStatistics sessionStatistics, GameModeHolder gameModeHolder, IComboSwitcher comboSwitcher)
         {
             _sessionStatistics = sessionStatistics;
-            _gameConfigSO = gameConfigSO;
+            _gameModeHolder = gameModeHolder;
             _comboSwitcher = comboSwitcher;
         }
 
@@ -24,7 +26,7 @@ namespace Cut
             _sessionStatistics.IncrementBrokenCombosNumber();
             OnComboBroken();
 
-            if (_gameConfigSO.FailSwitch)
+            if (_gameModeHolder.CurrentGameMode.FailSwitch)
                 _comboSwitcher.SwitchCombo();
         }
 

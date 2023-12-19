@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Cut;
 using Zenject;
 
-namespace Cut
+namespace Assets.Scripts.StatisticsFeature
 {
     public class SessionStatistics
     {
+        private IGameplayMediatorToUI _gameplayMediator;
+        private int _finishedCombosNumber = 0;
+        private int _brokenCombosNumber = 0;
         [Inject]
         public void Construct(IGameplayMediatorToUI gameplayMediator)
         {
             _gameplayMediator = gameplayMediator;
         }
-
-        private IGameplayMediatorToUI _gameplayMediator;
-        private int _finishedCombosNumber = 0;
-        private int _brokenCombosNumber = 0;
-
         public void IncrementFinishedCombosNumber()
         {
             _finishedCombosNumber++;
@@ -24,6 +22,13 @@ namespace Cut
         public void IncrementBrokenCombosNumber() 
         {
             _brokenCombosNumber++;
+            _gameplayMediator.UpdateBrokenCombosNumber(_brokenCombosNumber);
+        }
+        public void ResetSessionStatistics()
+        {
+            _finishedCombosNumber = 0;
+            _brokenCombosNumber = 0;
+            _gameplayMediator.UpdateFinishedCombosNumber(_finishedCombosNumber);
             _gameplayMediator.UpdateBrokenCombosNumber(_brokenCombosNumber);
         }
     }
