@@ -1,4 +1,4 @@
-﻿namespace Cut
+﻿namespace ComboGenerationFeature
 {
     public interface IComboGeneratorTest
     {

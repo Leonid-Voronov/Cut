@@ -3,7 +3,7 @@ using TMPro;
 using Zenject;
 using System.Collections.Generic;
 using Assets.Scripts.GameModeFeature;
-using Cut;
+using System;
 
 namespace UI.MetagameUI
 {
@@ -11,7 +11,7 @@ namespace UI.MetagameUI
     {
         [SerializeField] private TMP_Dropdown _dropdown;
         private IMetagameMediatorToLogic _metagameMediatorToLogic;
-        private GameConfigSO _gameConfigSO;
+        private IStartGameButton _startGameButton;
         private int _previousValue;
 
         private Dictionary<int, GameMode> _gameModes =
@@ -22,21 +22,19 @@ namespace UI.MetagameUI
             };
 
         [Inject]
-        public void Construct(IMetagameMediatorToLogic metagameMediatorToLogic, GameConfigSO gameConfigSO)
+        public void Construct(IMetagameMediatorToLogic metagameMediatorToLogic, IStartGameButton startGameButton)
         {
             _metagameMediatorToLogic = metagameMediatorToLogic;
-            _gameConfigSO = gameConfigSO;
+            _startGameButton = startGameButton;
         }
 
         private void OnEnable() 
         {
-            _dropdown.onValueChanged.AddListener( delegate { SetGamemode(_dropdown); } );
-
-            if (_gameConfigSO.StartMode == StartMode.GameSettingsWindow)
-                _metagameMediatorToLogic.SetNewGameMode(_gameModes[_dropdown.value]);
+            _dropdown.onValueChanged.AddListener( delegate { SetGameMode(_dropdown); } );
+            _startGameButton.StartButtonPressed += SetGameMode;
         }
 
-        private void SetGamemode(TMP_Dropdown change)
+        private void SetGameMode(TMP_Dropdown change)
         {
             if (change.value != _previousValue) //OnValueChanged event invokes twice, this will prevent subscribers to be called twice too 
             {
@@ -46,9 +44,15 @@ namespace UI.MetagameUI
             _previousValue = change.value;
         }
 
+        private void SetGameMode(object sender, EventArgs e)
+        {
+            _metagameMediatorToLogic.SetNewGameMode(_gameModes[_dropdown.value]);
+        }
+
         private void OnDisable()
         {
-            _dropdown.onValueChanged.RemoveListener(delegate { SetGamemode(_dropdown); });
+            _dropdown.onValueChanged.RemoveListener(delegate { SetGameMode(_dropdown); });
+            _startGameButton.StartButtonPressed -= SetGameMode;
         }
     }
 }

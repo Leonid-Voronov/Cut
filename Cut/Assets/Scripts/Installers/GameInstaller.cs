@@ -12,17 +12,23 @@ using GameplayVisualsFeature;
 using TagComponents;
 using UI.MetagameUI.Windows;
 using UI;
+using ComboGenerationFeature;
 
 namespace Cut.Infrastracture
 {
     public class GameInstaller : MonoInstaller<GameInstaller>
     {
         [Header("Scriptable objects")]
-        [SerializeField] private CombosTemplatesSO _templates;
         [SerializeField] private ButtonsHolderSO _buttonsHolder;
         [SerializeField] private GameConfigSO _gameConfig;
         [SerializeField] private VisualsPresetSO _gameplayVisuals;
         [SerializeField] private VisualsPresetSO _defaultGameplayVisuals;
+
+        [Header("CombosTemplates")]
+        [SerializeField] private CombosTemplatesSO _threeSymbolsCombosTemplates;
+        [SerializeField] private CombosTemplatesSO _fiveSymbolsCombosTemplates;
+        [SerializeField] private CombosTemplatesSO _sevenSymbolsCombosTemplates;
+        [SerializeField] private CombosTemplatesSO _defaultCombosTemplates;
 
         [Header("Game modes")]
         [SerializeField] private GameModeSO _unlimitedTimeMode;
@@ -42,12 +48,13 @@ namespace Cut.Infrastracture
         [SerializeField] private GameplayZone _gameplayZone;
 
         [Header("Monobehaviours")]
-        
+
         [SerializeField] private TimerUpdater _timerUpdater;
         [SerializeField] private AppStarter _appStarter;
         [SerializeField] private EnvironmentScaleHolder _environmentScaleHolder;
+        [SerializeField] private StartGameButton _startGameButton;
 
-        [Header ("Mediators")]
+        [Header("Mediators")]
         [SerializeField] private GameplayMediatorToLogic _gameplayMediatorToLogic;
         [SerializeField] private GameplayMediatorToUI _gameplayMediatorToUI;
         [SerializeField] private MetagameMediatorToLogic _metagameMediatorToLogic;
@@ -61,7 +68,7 @@ namespace Cut.Infrastracture
         public override void InstallBindings()
         {
             Container.Bind<CombosTemplatesSO>()
-                .FromInstance( _templates )
+                .FromInstance(_defaultCombosTemplates)
                 .AsSingle();
 
             Container.Bind<IRandomTemplateService>()
@@ -81,7 +88,7 @@ namespace Cut.Infrastracture
                 .AsSingle();
 
             Container.Bind<ButtonsHolderSO>()
-                .FromInstance( _buttonsHolder )
+                .FromInstance(_buttonsHolder)
                 .AsSingle();
 
             Container.Bind<IListRandomService>()
@@ -104,7 +111,7 @@ namespace Cut.Infrastracture
             Container.Bind<IComboSwitcher>()
                 .To<ComboSwitcher>()
                 .AsSingle();
-            
+
             Container.Bind<IComboFinisher>()
                 .To<ComboFinisherPrototype>()
                 .AsSingle();
@@ -134,11 +141,11 @@ namespace Cut.Infrastracture
             Container.BindFactory<InstantPrepTimer, InstantPrepTimer.Factory>();
 
             Container.Bind<ITimerUpdater>()
-                .FromInstance(_timerUpdater) 
+                .FromInstance(_timerUpdater)
                 .AsSingle();
-            
+
             Container.Bind<IPrepTimerDisplay>()
-                .FromInstance(_prepTimerDisplay) 
+                .FromInstance(_prepTimerDisplay)
                 .AsSingle();
 
             Container.Bind<ITimerHolder>()
@@ -243,15 +250,27 @@ namespace Cut.Infrastracture
                 .AsSingle();
 
             Container.Bind<MenuWindow>()
-                .FromInstance(_menuWindow) 
+                .FromInstance(_menuWindow)
                 .AsSingle();
 
             Container.Bind<SettingsWindow>()
-                .FromInstance(_settingsWindow) 
+                .FromInstance(_settingsWindow)
                 .AsSingle();
 
             Container.Bind<IWindowHolder>()
                 .To<MetagameWindowHolder>()
+                .AsSingle();
+
+            Container.Bind<IStartGameButton>()
+                .FromInstance(_startGameButton)
+                .AsSingle();
+
+            Container.Bind<CombosTemplatesHolder>()
+                .To<CombosTemplatesHolder>()
+                .AsSingle();
+
+            Container.Bind<Dictionary<CombosTemplatesName, CombosTemplatesSO>>()
+                .FromInstance(PackCombosTemplatesToDictionary())
                 .AsSingle();
 
             //Tests
@@ -279,6 +298,18 @@ namespace Cut.Infrastracture
                 { VisualPresetName.Default, _gameplayVisuals }
             };
             return gameplayVisuals;
+        }
+
+        private Dictionary<CombosTemplatesName, CombosTemplatesSO> PackCombosTemplatesToDictionary()
+        {
+            Dictionary<CombosTemplatesName, CombosTemplatesSO> combosTemplates = new Dictionary<CombosTemplatesName, CombosTemplatesSO>
+            {
+                { CombosTemplatesName.Default, _defaultCombosTemplates },
+                { CombosTemplatesName.ThreeSymbols, _threeSymbolsCombosTemplates },
+                { CombosTemplatesName.FiveSymbols, _fiveSymbolsCombosTemplates },
+                { CombosTemplatesName.SevenSymbols, _sevenSymbolsCombosTemplates }
+            };
+            return combosTemplates;
         }
     }
 }

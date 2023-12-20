@@ -6,9 +6,9 @@ namespace UI.MetagameUI
 {
     public class PlayButton : MonoBehaviour
     {
-
         [SerializeField] private Button _button;
         private IMetagameMediatorToUI _metagameMediatorToUI;
+
         [Inject]
         public void Construct(IMetagameMediatorToUI metagameMediatorToUI)
         {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zenject;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     public class ComboGenerator : IComboGenerator
     {

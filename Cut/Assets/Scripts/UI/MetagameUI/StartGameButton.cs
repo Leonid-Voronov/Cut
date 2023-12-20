@@ -1,13 +1,15 @@
 using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
+using System;
 
 namespace UI.MetagameUI
 {
-    public class StartGameButton : MonoBehaviour
+    public class StartGameButton : MonoBehaviour, IStartGameButton
     {
         [SerializeField] private Button _button;
         private IMetagameMediatorToLogic _metagameMediatorToLogic;
+        public event EventHandler StartButtonPressed;
         [Inject]
         public void Construct(IMetagameMediatorToLogic metagameMediatorToLogic)
         {
@@ -22,6 +24,12 @@ namespace UI.MetagameUI
         private void PressStartButton()
         {
             _metagameMediatorToLogic.StartGame();
+            OnStartButtonPress();
+        }
+
+        private void OnStartButtonPress()
+        {
+            StartButtonPressed?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnDisable() 
