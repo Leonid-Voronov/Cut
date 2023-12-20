@@ -4096,7 +4096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedae989f7740014ab14354e9b7b9bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _templates: {fileID: 11400000, guid: 58843bb58980407458e9c9f827dd3fe1, type: 2}
+  _templates: {fileID: 11400000, guid: c34c93e8da9973f41afd5fcd2eed5aa7, type: 2}
   _buttonsHolder: {fileID: 11400000, guid: 6dc015b565a03414f855832a8f0b71bd, type: 2}
   _gameConfig: {fileID: 11400000, guid: 3a983dd572898624c9fface773711031, type: 2}
   _gameplayVisuals: {fileID: 11400000, guid: 8025e0554215b214bacee95a7cadfba1, type: 2}
