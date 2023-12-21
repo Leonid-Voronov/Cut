@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 using System.Collections.Generic;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public class GameplayMediatorToUI : MonoBehaviour, IGameplayMediatorToUI
     {

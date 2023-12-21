@@ -1,9 +1,8 @@
 ﻿using UI;
-using Cut;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts
+namespace Core
 {
     public class AppStarter : MonoBehaviour
     {

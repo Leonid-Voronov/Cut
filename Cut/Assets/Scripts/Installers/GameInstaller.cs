@@ -1,20 +1,20 @@
 using Zenject;
 using UnityEngine;
 using System.Collections.Generic;
-using Assets.Scripts.GameModeFeature;
-using Assets.Scripts;
-using Assets.Scripts.TagComponents;
-using Assets.Scripts.StatisticsFeature;
+using GameModeFeature;
+using Core;
+using TagComponents;
+using StatisticsFeature;
 using TimerFeature;
 using UI.GameplayUI;
 using UI.MetagameUI;
 using GameplayVisualsFeature;
-using TagComponents;
 using UI.MetagameUI.Windows;
 using UI;
 using ComboGenerationFeature;
+using ComboSwitchingFeature;
 
-namespace Cut.Infrastracture
+namespace Infrastracture
 {
     public class GameInstaller : MonoInstaller<GameInstaller>
     {
@@ -43,8 +43,8 @@ namespace Cut.Infrastracture
         [SerializeField] private FinishedCombosDisplay _finishedCombosDisplay;
 
         [Header("Objects")]
-        [SerializeField] private GameplayUI _gameplayUI;
-        [SerializeField] private MetagameUI _metagameUI;
+        [SerializeField] private GameplayUITag _gameplayUI;
+        [SerializeField] private MetagameUITag _metagameUI;
         [SerializeField] private GameplayZone _gameplayZone;
 
         [Header("Monobehaviours")]
@@ -184,11 +184,11 @@ namespace Cut.Infrastracture
                 .FromInstance(_gameConfig)
                 .AsSingle();
 
-            Container.Bind<GameplayUI>()
+            Container.Bind<GameplayUITag>()
                 .FromInstance(_gameplayUI)
                 .AsSingle();
 
-            Container.Bind<MetagameUI>()
+            Container.Bind<MetagameUITag>()
                 .FromInstance(_metagameUI)
                 .AsSingle();
 

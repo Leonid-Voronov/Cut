@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.GameModeFeature
+﻿namespace GameModeFeature
 {
     public enum GameMode
     {

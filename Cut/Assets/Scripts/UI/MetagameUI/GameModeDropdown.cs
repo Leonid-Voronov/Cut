@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Zenject;
 using System.Collections.Generic;
-using Assets.Scripts.GameModeFeature;
+using GameModeFeature;
 using System;
 
 namespace UI.MetagameUI

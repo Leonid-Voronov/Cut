@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cut
+namespace TimerFeature
 {
     public class TimerUpdater : MonoBehaviour, ITimerUpdater
     {

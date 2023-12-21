@@ -1,10 +1,11 @@
 using System;
-using Assets.Scripts.StatisticsFeature;
-using Cut;
+using StatisticsFeature;
+using ComboSwitchingFeature;
 using GameplayVisualsFeature;
 using Zenject;
+using UI;
 
-namespace Assets.Scripts
+namespace Core
 {
     public class GameReseter : IGameReseter
     {

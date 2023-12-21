@@ -1,4 +1,4 @@
-namespace Cut
+namespace GameModeFeature
 {
     public enum StartTimerCondition
     {

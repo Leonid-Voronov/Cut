@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.GameModeFeature;
+﻿using GameModeFeature;
 using ComboGenerationFeature;
-using UnityEngine;
 
 namespace UI.MetagameUI
 {

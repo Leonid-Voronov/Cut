@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using UI.GameplayUI;
 
-namespace Cut
+namespace InputFeature
 {
     public class InputButton : MonoBehaviour
     {

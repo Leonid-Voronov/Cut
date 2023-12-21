@@ -1,9 +1,9 @@
 ﻿using System;
 using Zenject;
-using Assets.Scripts.GameModeFeature;
-using Assets.Scripts.StatisticsFeature;
+using GameModeFeature;
+using StatisticsFeature;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class ComboBreakerPrototype : IComboBreaker
     {

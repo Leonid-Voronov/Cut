@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public interface IComboHolder 
     {

@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.GameModeFeature;
+﻿using GameModeFeature;
 using ComboGenerationFeature;
-using Cut;
+using Core;
 using UnityEngine;
 using Zenject;
 

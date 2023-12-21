@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace Cut
+namespace TimerFeature
 {
     public class UnlimitedPrepTimer : IPrepTimer
     {

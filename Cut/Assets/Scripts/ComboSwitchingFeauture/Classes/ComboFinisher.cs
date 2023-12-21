@@ -1,8 +1,8 @@
 ﻿using System;
 using Zenject;
-using Assets.Scripts.StatisticsFeature;
+using StatisticsFeature;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class ComboFinisherPrototype : IComboFinisher
     {

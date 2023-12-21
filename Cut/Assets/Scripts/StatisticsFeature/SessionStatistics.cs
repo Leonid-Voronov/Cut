@@ -1,7 +1,7 @@
-﻿using Cut;
+﻿using UI.GameplayUI;
 using Zenject;
 
-namespace Assets.Scripts.StatisticsFeature
+namespace StatisticsFeature
 {
     public class SessionStatistics
     {

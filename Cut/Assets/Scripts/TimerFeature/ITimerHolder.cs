@@ -1,4 +1,4 @@
-﻿namespace Cut
+﻿namespace TimerFeature
 {
     public interface ITimerHolder
     {

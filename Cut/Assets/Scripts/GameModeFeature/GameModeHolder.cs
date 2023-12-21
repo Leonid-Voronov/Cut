@@ -1,8 +1,7 @@
-using Cut;
 using System.Collections.Generic;
 using Zenject;
 
-namespace Assets.Scripts.GameModeFeature
+namespace GameModeFeature
 {
     public class GameModeHolder
     {

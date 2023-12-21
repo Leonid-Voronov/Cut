@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.GameModeFeature
+namespace GameModeFeature
 {
     public class GameModeSetEventArgs : EventArgs
     {

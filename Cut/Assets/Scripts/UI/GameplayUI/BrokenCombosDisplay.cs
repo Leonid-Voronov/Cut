@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public class BrokenCombosDisplay : MonoBehaviour, IBrokenCombosDisplay
     {
