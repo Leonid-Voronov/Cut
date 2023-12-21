@@ -7,7 +7,6 @@ namespace ComboGenerationFeature
     public class CombosTemplatesSO : ScriptableObject
     {
         [SerializeField] private List<Combo> _combos;
-
         public List<Combo> Combos => _combos;
         public List<int> GetCombo(int index) 
         {
