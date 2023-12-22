@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Cut
+namespace GameModeFeature
 {
     [CreateAssetMenu(fileName = "GameMode", menuName = "ScriptableObjects/GameMode", order = 3)]
     public class GameModeSO : ScriptableObject

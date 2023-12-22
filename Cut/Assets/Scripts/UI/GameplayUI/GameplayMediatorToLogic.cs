@@ -1,7 +1,7 @@
-﻿using Assets.Scripts;
+﻿using Core;
 using UnityEngine;
 using Zenject;
-using Cut;
+using ComboSwitchingFeature;
 
 namespace UI.GameplayUI
 {

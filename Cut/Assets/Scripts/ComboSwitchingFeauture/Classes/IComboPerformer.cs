@@ -1,4 +1,4 @@
-﻿namespace Cut
+﻿namespace ComboSwitchingFeature
 {
     public interface IComboPerformer
     {

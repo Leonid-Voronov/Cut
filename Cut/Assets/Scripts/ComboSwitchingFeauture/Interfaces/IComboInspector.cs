@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public interface IComboInspector
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Zenject;
-using System;
-using System.Diagnostics;
+using ComboGenerationFeature;
+using UI.GameplayUI;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class ComboSwitcher : IComboSwitcher
     {

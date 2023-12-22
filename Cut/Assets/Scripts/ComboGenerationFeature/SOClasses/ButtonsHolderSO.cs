@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     [CreateAssetMenu(fileName = "Buttons", menuName = "ScriptableObjects/Buttons", order = 2)]
     public class ButtonsHolderSO : ScriptableObject

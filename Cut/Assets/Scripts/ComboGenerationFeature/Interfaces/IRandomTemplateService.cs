@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     public interface IRandomTemplateService
     {

@@ -1,8 +1,10 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 using GameplayVisualsFeature;
+using ComboSwitchingFeature;
+using UI;
+using TimerFeature;
 
-namespace Cut
+namespace Core
 {
     public class GameStarter
     {

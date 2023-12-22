@@ -1,34 +1,38 @@
-using Assets.Scripts.TagComponents;
+using TagComponents;
 using UnityEngine;
 using Zenject;
 
-public class GameMediator : MonoBehaviour
+namespace UI
 {
-    private GameplayUI _gameplayUI;
-    private MetagameUI _metagameUI;
-
-    [Inject]
-    public void Construct(GameplayUI gameplayUI, MetagameUI metagameUI)
+    public class GameMediator : MonoBehaviour
     {
-        _gameplayUI = gameplayUI;
-        _metagameUI = metagameUI;
-    }
+        private GameplayUITag _gameplayUI;
+        private MetagameUITag _metagameUI;
 
-    public void DisableAllUI()
-    {
-        _gameplayUI.gameObject.SetActive(false);
-        _metagameUI.gameObject.SetActive(false);
-    }
+        [Inject]
+        public void Construct(GameplayUITag gameplayUI, MetagameUITag metagameUI)
+        {
+            _gameplayUI = gameplayUI;
+            _metagameUI = metagameUI;
+        }
 
-    public void SwitchToGameplayUI()
-    {
-        DisableAllUI();
-        _gameplayUI.gameObject.SetActive(true);
-    }
+        public void DisableAllUI()
+        {
+            _gameplayUI.gameObject.SetActive(false);
+            _metagameUI.gameObject.SetActive(false);
+        }
 
-    public void SwitchToMetagameUI()
-    {
-        DisableAllUI();
-        _metagameUI.gameObject.SetActive(true);
+        public void SwitchToGameplayUI()
+        {
+            DisableAllUI();
+            _gameplayUI.gameObject.SetActive(true);
+        }
+
+        public void SwitchToMetagameUI()
+        {
+            DisableAllUI();
+            _metagameUI.gameObject.SetActive(true);
+        }
     }
 }
+

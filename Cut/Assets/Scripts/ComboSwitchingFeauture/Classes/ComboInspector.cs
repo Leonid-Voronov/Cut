@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class ComboInspector : IComboInspector
     {

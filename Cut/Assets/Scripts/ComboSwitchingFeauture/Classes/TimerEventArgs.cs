@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class TimerEventArgs : EventArgs
     {

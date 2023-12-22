@@ -1,9 +1,9 @@
-using Cut;
-using System;
-using System.Threading;
 using Zenject;
 using UnityEngine;
-using Assets.Scripts.GameModeFeature;
+using GameModeFeature;
+using ComboSwitchingFeature;
+using UI.GameplayUI;
+using TimerFeature;
 
 public class FirstTapPrepTimer : IPrepTimer
 {

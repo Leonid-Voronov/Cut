@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public interface IGameplayMediatorToUI
     {

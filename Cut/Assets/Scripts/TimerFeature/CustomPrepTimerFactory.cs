@@ -1,7 +1,7 @@
 using Zenject;
-using Assets.Scripts.GameModeFeature;
+using GameModeFeature;
 
-namespace Cut
+namespace TimerFeature
 {
     public class CustomPrepTimerFactory : IFactory<IPrepTimer>
     {

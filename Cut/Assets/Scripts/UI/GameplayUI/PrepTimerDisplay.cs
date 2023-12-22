@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public class PrepTimerDisplay : MonoBehaviour, IPrepTimerDisplay
     {

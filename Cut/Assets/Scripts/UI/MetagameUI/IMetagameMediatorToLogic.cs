@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.GameModeFeature;
-using UnityEngine;
+﻿using GameModeFeature;
+using ComboGenerationFeature;
 
 namespace UI.MetagameUI
 {
@@ -7,6 +7,7 @@ namespace UI.MetagameUI
     {
         void SetNewGameMode(GameMode gameMode);
         void StartGame();
+        void SetNewCombosTemplates(CombosTemplatesName combosTemplatesName);
 
     }
 }

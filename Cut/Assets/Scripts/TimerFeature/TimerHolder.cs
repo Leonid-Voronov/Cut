@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
-using Assets.Scripts.GameModeFeature;
-using Assets.Scripts;
-using Cut;
+using GameModeFeature;
+using UI.GameplayUI;
+using ComboSwitchingFeature;
+using Core;
 
 namespace TimerFeature
 {

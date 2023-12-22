@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     public interface IComboGenerator
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Cut
+namespace InputFeature
 {
     public class InputButtonPressedEventArgs : EventArgs
     {

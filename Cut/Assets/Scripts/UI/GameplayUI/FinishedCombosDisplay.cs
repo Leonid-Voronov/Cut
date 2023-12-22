@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public class FinishedCombosDisplay : MonoBehaviour, IFinishedCombosDisplay
     {

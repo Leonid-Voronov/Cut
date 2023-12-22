@@ -1,6 +1,6 @@
 using UI.MetagameUI;
 using Zenject;
-using Cut;
+using Core;
 
 namespace UI
 {

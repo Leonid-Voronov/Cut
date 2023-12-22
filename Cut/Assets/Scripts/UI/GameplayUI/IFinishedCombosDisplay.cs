@@ -1,4 +1,4 @@
-﻿namespace Cut
+﻿namespace UI.GameplayUI
 {
     public interface IFinishedCombosDisplay 
     {

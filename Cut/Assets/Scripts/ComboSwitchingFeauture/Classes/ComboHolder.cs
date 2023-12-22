@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using Zenject;
+using ComboGenerationFeature;
 
-namespace Cut
+namespace ComboSwitchingFeature
 {
     public class ComboHolder : IComboHolder
     {

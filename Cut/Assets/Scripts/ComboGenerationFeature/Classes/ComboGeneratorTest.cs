@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Zenject;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     public class ComboGeneratorTest : IComboGeneratorTest
     {

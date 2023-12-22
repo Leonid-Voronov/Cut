@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-namespace Cut
+namespace UI.GameplayUI
 {
     public class ComboDisplay : MonoBehaviour, IComboDisplay
     {

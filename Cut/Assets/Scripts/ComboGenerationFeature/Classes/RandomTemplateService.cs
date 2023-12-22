@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cut
+namespace ComboGenerationFeature
 {
     public class RandomTemplateService : IRandomTemplateService
     {
-        private CombosTemplatesSO _templates;
+        private CombosTemplatesHolder _templatesHolder;
 
-        public RandomTemplateService(CombosTemplatesSO combosTemplatesSO) 
+        public RandomTemplateService(CombosTemplatesHolder combosTemplatesHolder) 
         {
-            _templates = combosTemplatesSO;
+            _templatesHolder = combosTemplatesHolder;
         }
 
         public List<int> GetRandomTemplate()
         {
-            int randomIndex = Random.Range(0, _templates.Combos.Count);
-            return _templates.GetCombo(randomIndex);
+            CombosTemplatesSO combosTemplates = _templatesHolder.CurrentCombosTemplates;
+            int randomIndex = Random.Range(0, combosTemplates.Combos.Count);
+            return combosTemplates.GetCombo(randomIndex);
         }
     }
 }
