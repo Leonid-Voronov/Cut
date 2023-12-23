@@ -11,10 +11,10 @@ namespace UI.GameplayUI
 
         public event EventHandler ComboSeen;
 
-        public void DisplayCombo(List<int> combo) 
+        public void DisplayCombo(List<string> combo) 
         {
             string result = "";
-            foreach (int item in combo) { result += item; }
+            foreach (string item in combo) { result += item; }
             text.text = result;
             OnComboSeen();
         }

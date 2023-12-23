@@ -13,6 +13,7 @@ using UI.MetagameUI.Windows;
 using UI;
 using ComboGenerationFeature;
 using ComboSwitchingFeature;
+using ComboSwitchingFeauture;
 
 namespace Infrastracture
 {
@@ -271,6 +272,10 @@ namespace Infrastracture
 
             Container.Bind<Dictionary<CombosTemplatesName, CombosTemplatesSO>>()
                 .FromInstance(PackCombosTemplatesToDictionary())
+                .AsSingle();
+
+            Container.Bind<IComboConverter>()
+                .To<SimpleComboConverter>()
                 .AsSingle();
 
             //Tests

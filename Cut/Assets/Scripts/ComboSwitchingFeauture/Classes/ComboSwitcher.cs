@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Zenject;
 using ComboGenerationFeature;
 using UI.GameplayUI;
+using ComboSwitchingFeauture;
 
 namespace ComboSwitchingFeature
 {
@@ -11,21 +12,24 @@ namespace ComboSwitchingFeature
         private IComboGenerator _comboGenerator;
         private IRandomTemplateService _randomTemplateService;
         private IGameplayMediatorToUI _gameplayMediator;
+        private IComboConverter _comboConverter;
 
         [Inject]
-        public ComboSwitcher(IComboInspector comboInspector, IComboGenerator comboGenerator, IRandomTemplateService randomTemplateService, IGameplayMediatorToUI gameplayMediator)
+        public ComboSwitcher(IComboInspector comboInspector, IComboGenerator comboGenerator, IRandomTemplateService randomTemplateService, IGameplayMediatorToUI gameplayMediator, IComboConverter comboConverter)
         {
             _comboInspector = comboInspector;
             _comboGenerator = comboGenerator;
             _randomTemplateService = randomTemplateService;
             _gameplayMediator = gameplayMediator;
+            _comboConverter = comboConverter;
         }
 
         public void SwitchCombo()
         {
             List<int> generatedCombo = _comboGenerator.GenerateCombo(_randomTemplateService.GetRandomTemplate());
             _comboInspector.SetExpectedCombo(generatedCombo);
-            _gameplayMediator.UpdateComboDisplay(generatedCombo);
+            List<string> stringCombo = _comboConverter.ConvertCombo(generatedCombo);
+            _gameplayMediator.UpdateComboDisplay(stringCombo);
         }
     }
 }
