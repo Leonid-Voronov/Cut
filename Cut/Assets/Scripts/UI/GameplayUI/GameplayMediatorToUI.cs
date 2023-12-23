@@ -19,11 +19,11 @@ namespace UI.GameplayUI
         private IBrokenCombosDisplay _brokenCombosDisplay;
         private IFinishedCombosDisplay _finishedCombosDisplay;
         private IPrepTimerDisplay _prepTimerDisplay;
-        public void UpdateComboDisplay(List<string> updatedCombo)     => _comboDisplay.DisplayCombo(updatedCombo);
-        public void UpdateBrokenCombosNumber(int statisticsNumber)    => _brokenCombosDisplay.DisplayBrokenCombos(statisticsNumber);
-        public void UpdateFinishedCombosNumber(int statisticsNumber)  => _finishedCombosDisplay.DisplayFinishedCombos(statisticsNumber);
-        public void DisplayTimer(float remainingTime, float fullTime) => _prepTimerDisplay.DisplayTimer(remainingTime, fullTime);
-        public void DisplayFullTimer()                                => _prepTimerDisplay.DisplayFull();
+        public void UpdateComboDisplay(List<string> updatedCombo, int lastFinishedNumber)       => _comboDisplay.DisplayCombo(updatedCombo, lastFinishedNumber);
+        public void UpdateBrokenCombosNumber(int statisticsNumber)                              => _brokenCombosDisplay.DisplayBrokenCombos(statisticsNumber);
+        public void UpdateFinishedCombosNumber(int statisticsNumber)                            => _finishedCombosDisplay.DisplayFinishedCombos(statisticsNumber);
+        public void DisplayTimer(float remainingTime, float fullTime)                           => _prepTimerDisplay.DisplayTimer(remainingTime, fullTime);
+        public void DisplayFullTimer()                                                          => _prepTimerDisplay.DisplayFull();
     }
 }
 

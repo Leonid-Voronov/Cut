@@ -5,7 +5,7 @@ namespace UI.GameplayUI
 {
     public interface IComboDisplay
     {
-        public void DisplayCombo(List<string> combo);
+        public void DisplayCombo(List<string> combo, int lastFinishedNumber);
 
         event EventHandler ComboSeen;
     }

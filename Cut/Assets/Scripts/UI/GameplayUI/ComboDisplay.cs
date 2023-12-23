@@ -11,10 +11,28 @@ namespace UI.GameplayUI
 
         public event EventHandler ComboSeen;
 
-        public void DisplayCombo(List<string> combo) 
+        private const string finishedColorStart = "<color=green>";
+        private const string finishedColorEnd = "</color>";
+
+        public void DisplayCombo(List<string> combo, int lastFinishedNumber)
         {
             string result = "";
-            foreach (string item in combo) { result += item; }
+
+            if (lastFinishedNumber > 0)
+                result += finishedColorStart;
+
+            for (int i = 0; i < combo.Count; i++) 
+            {
+                if (lastFinishedNumber > 0 && i == lastFinishedNumber)
+                {
+                    Debug.Log("Hello");
+                    result += finishedColorEnd;
+                }
+                    
+
+                string item = combo[i];
+                result += item; 
+            }
             text.text = result;
             OnComboSeen();
         }

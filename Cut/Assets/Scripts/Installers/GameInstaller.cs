@@ -13,7 +13,6 @@ using UI.MetagameUI.Windows;
 using UI;
 using ComboGenerationFeature;
 using ComboSwitchingFeature;
-using ComboSwitchingFeauture;
 
 namespace Infrastracture
 {

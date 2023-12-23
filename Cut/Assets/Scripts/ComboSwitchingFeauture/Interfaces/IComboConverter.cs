@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ComboSwitchingFeauture
+namespace ComboSwitchingFeature
 {
     public interface IComboConverter 
     {

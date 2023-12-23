@@ -1,12 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UI.GameplayUI;
 
 namespace ComboSwitchingFeature
 {
     public class ComboInspector : IComboInspector
     {
+        private IGameplayMediatorToUI _gameplayMediatorToUI;
+        private IComboConverter _comboConverter;
         private List<int> _expectedCombo = new List<int>();
+
+        public ComboInspector(IGameplayMediatorToUI gameplayMediatorToUI, IComboConverter comboConverter)
+        {
+            _gameplayMediatorToUI = gameplayMediatorToUI;
+            _comboConverter = comboConverter;
+        }
 
         public bool IsComboWrong(List<int> currentCombo)
         {
@@ -29,6 +38,8 @@ namespace ComboSwitchingFeature
                 }
             }
 
+            List<string> stringCombo = _comboConverter.ConvertCombo(_expectedCombo);
+            _gameplayMediatorToUI.UpdateComboDisplay(stringCombo, currentCombo.Count);
             return false;
         }
 
@@ -41,6 +52,8 @@ namespace ComboSwitchingFeature
 
         public void SetExpectedCombo(List<int> newCombo)
         {
+            List<string> stringCombo = _comboConverter.ConvertCombo(newCombo);
+            _gameplayMediatorToUI.UpdateComboDisplay(stringCombo, 0);
             _expectedCombo = newCombo;
         }
     }
