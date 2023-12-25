@@ -4533,6 +4533,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: INSTANT
       m_Image: {fileID: 0}
+    - m_Text: MATH INSTANT
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5162,6 +5164,7 @@ MonoBehaviour:
   _unlimitedTimeMode: {fileID: 11400000, guid: 11ce0ab02ffafd1438e6f80f5b4e4cb9, type: 2}
   _firstTapMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _instantMode: {fileID: 11400000, guid: abc87d31b5e98aa488157c59c1215225, type: 2}
+  _mathInstantMode: {fileID: 11400000, guid: ba57c2f3a360be14e9503f4cda00956e, type: 2}
   _defaultGameMode: {fileID: 11400000, guid: b70ab58ba23826645b49e772b4624ffc, type: 2}
   _comboDisplayer: {fileID: 2104256834}
   _prepTimerDisplay: {fileID: 1324998644}

@@ -8,13 +8,14 @@ namespace ComboSwitchingFeature
     public class ComboInspector : IComboInspector
     {
         private IGameplayMediatorToUI _gameplayMediatorToUI;
-        private IComboConverter _comboConverter;
+        private ComboConverterHolder _comboConverterHolder;
         private List<int> _expectedCombo = new List<int>();
+        private List<string> _stringCombo = new List<string>();
 
-        public ComboInspector(IGameplayMediatorToUI gameplayMediatorToUI, IComboConverter comboConverter)
+        public ComboInspector(IGameplayMediatorToUI gameplayMediatorToUI, ComboConverterHolder comboConverterHolder)
         {
             _gameplayMediatorToUI = gameplayMediatorToUI;
-            _comboConverter = comboConverter;
+            _comboConverterHolder = comboConverterHolder;
         }
 
         public bool IsComboWrong(List<int> currentCombo)
@@ -38,8 +39,7 @@ namespace ComboSwitchingFeature
                 }
             }
 
-            List<string> stringCombo = _comboConverter.ConvertCombo(_expectedCombo);
-            _gameplayMediatorToUI.UpdateComboDisplay(stringCombo, currentCombo.Count);
+            _gameplayMediatorToUI.UpdateComboDisplay(_stringCombo, currentCombo.Count);
             return false;
         }
 
@@ -52,8 +52,8 @@ namespace ComboSwitchingFeature
 
         public void SetExpectedCombo(List<int> newCombo)
         {
-            List<string> stringCombo = _comboConverter.ConvertCombo(newCombo);
-            _gameplayMediatorToUI.UpdateComboDisplay(stringCombo, 0);
+            _stringCombo = _comboConverterHolder.CurrentComboConverter.ConvertCombo(newCombo);
+            _gameplayMediatorToUI.UpdateComboDisplay(_stringCombo, 0);
             _expectedCombo = newCombo;
         }
     }

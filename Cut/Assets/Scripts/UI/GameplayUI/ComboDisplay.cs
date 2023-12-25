@@ -20,12 +20,13 @@ namespace UI.GameplayUI
 
             if (lastFinishedNumber > 0)
                 result += finishedColorStart;
+            else
+                OnComboSeen();
 
             for (int i = 0; i < combo.Count; i++) 
             {
                 if (lastFinishedNumber > 0 && i == lastFinishedNumber)
                 {
-                    Debug.Log("Hello");
                     result += finishedColorEnd;
                 }
 
@@ -33,7 +34,6 @@ namespace UI.GameplayUI
                 result += item; 
             }
             text.text = result;
-            OnComboSeen();
         }
 
         private void OnComboSeen()

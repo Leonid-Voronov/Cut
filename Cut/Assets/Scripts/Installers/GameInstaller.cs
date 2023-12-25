@@ -35,6 +35,7 @@ namespace Infrastracture
         [SerializeField] private GameModeSO _unlimitedTimeMode;
         [SerializeField] private GameModeSO _firstTapMode;
         [SerializeField] private GameModeSO _instantMode;
+        [SerializeField] private GameModeSO _mathInstantMode;
         [SerializeField] private GameModeSO _defaultGameMode;
 
         [Header("View")]
@@ -274,8 +275,12 @@ namespace Infrastracture
                 .FromInstance(PackCombosTemplatesToDictionary())
                 .AsSingle();
 
-            Container.Bind<IComboConverter>()
+            Container.Bind<SimpleComboConverter>()
                 .To<SimpleComboConverter>()
+                .AsSingle();
+
+            Container.Bind<MathComboConverter>()
+                .To<MathComboConverter>()
                 .AsSingle();
 
             Container.Bind<MathExpressionCreator>()
@@ -288,6 +293,10 @@ namespace Infrastracture
 
             Container.Bind<INumberRandomizer>()
                 .To<NumberRandomizer>()
+                .AsSingle();
+
+            Container.Bind<ComboConverterHolder>()
+                .To<ComboConverterHolder>()
                 .AsSingle();
 
             //Tests
@@ -303,7 +312,8 @@ namespace Infrastracture
             {
                 { GameMode.UnlimitedTime, _unlimitedTimeMode },
                 { GameMode.FirstTap, _firstTapMode },
-                { GameMode.Instant, _instantMode }
+                { GameMode.Instant, _instantMode },
+                { GameMode.MathInstant, _mathInstantMode },
             };
             return gameModes;
         }
