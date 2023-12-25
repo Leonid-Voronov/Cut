@@ -28,7 +28,6 @@ namespace UI.GameplayUI
                     Debug.Log("Hello");
                     result += finishedColorEnd;
                 }
-                    
 
                 string item = combo[i];
                 result += item; 

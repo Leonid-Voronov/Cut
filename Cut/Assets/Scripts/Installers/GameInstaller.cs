@@ -13,6 +13,7 @@ using UI.MetagameUI.Windows;
 using UI;
 using ComboGenerationFeature;
 using ComboSwitchingFeature;
+using MathEquationFeature;
 
 namespace Infrastracture
 {
@@ -275,6 +276,18 @@ namespace Infrastracture
 
             Container.Bind<IComboConverter>()
                 .To<SimpleComboConverter>()
+                .AsSingle();
+
+            Container.Bind<MathExpressionCreator>()
+                .To<MathExpressionCreator>()
+                .AsSingle();
+
+            Container.Bind<IMathOperationContainer>()
+                .To<MathOperationContainer>()
+                .AsSingle();
+
+            Container.Bind<INumberRandomizer>()
+                .To<NumberRandomizer>()
                 .AsSingle();
 
             //Tests
