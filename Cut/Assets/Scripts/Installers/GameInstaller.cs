@@ -13,6 +13,7 @@ using UI.MetagameUI.Windows;
 using UI;
 using ComboGenerationFeature;
 using ComboSwitchingFeature;
+using MathEquationFeature;
 
 namespace Infrastracture
 {
@@ -34,6 +35,7 @@ namespace Infrastracture
         [SerializeField] private GameModeSO _unlimitedTimeMode;
         [SerializeField] private GameModeSO _firstTapMode;
         [SerializeField] private GameModeSO _instantMode;
+        [SerializeField] private GameModeSO _mathInstantMode;
         [SerializeField] private GameModeSO _defaultGameMode;
 
         [Header("View")]
@@ -273,6 +275,30 @@ namespace Infrastracture
                 .FromInstance(PackCombosTemplatesToDictionary())
                 .AsSingle();
 
+            Container.Bind<SimpleComboConverter>()
+                .To<SimpleComboConverter>()
+                .AsSingle();
+
+            Container.Bind<MathComboConverter>()
+                .To<MathComboConverter>()
+                .AsSingle();
+
+            Container.Bind<MathExpressionCreator>()
+                .To<MathExpressionCreator>()
+                .AsSingle();
+
+            Container.Bind<IMathOperationContainer>()
+                .To<MathOperationContainer>()
+                .AsSingle();
+
+            Container.Bind<INumberRandomizer>()
+                .To<NumberRandomizer>()
+                .AsSingle();
+
+            Container.Bind<ComboConverterHolder>()
+                .To<ComboConverterHolder>()
+                .AsSingle();
+
             //Tests
 
             //Container.Bind<FirstTapPrepTimer>().To<FirstTapPrepTimer>().AsSingle().NonLazy();
@@ -286,7 +312,8 @@ namespace Infrastracture
             {
                 { GameMode.UnlimitedTime, _unlimitedTimeMode },
                 { GameMode.FirstTap, _firstTapMode },
-                { GameMode.Instant, _instantMode }
+                { GameMode.Instant, _instantMode },
+                { GameMode.MathInstant, _mathInstantMode },
             };
             return gameModes;
         }

@@ -18,7 +18,8 @@ namespace UI.MetagameUI
             new Dictionary<int, GameMode>
             {
                 {0, GameMode.FirstTap },
-                {1, GameMode.Instant }
+                {1, GameMode.Instant },
+                {2, GameMode.MathInstant },
             };
 
         [Inject]
